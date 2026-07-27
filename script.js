@@ -195,18 +195,28 @@ function openProject(project){
 
     }
 
-    else if(project === "tic"){
+ else if(project === "ai"){
 
-        title.innerHTML = "Tic Tac Toe";
+    title.innerHTML = "AI Career Assistant Platform";
 
-        description.innerHTML =
-        "A modern Tic Tac Toe game created using JavaScript, HTML and CSS with DOM manipulation.";
+    description.innerHTML =
+    "An AI-powered Career Assistant Platform built to help users analyze resumes, discover suitable career paths, prepare for interviews, and receive personalized job recommendations.";
 
-        github.href =
-        "https://github.com/rohitmishra-devops/tictactoe";
+    github.href =
+    "https://github.com/rohitmishra-devops/ai-career-assistant-platform";
 
-    }
+}
+     else if(project === "image"){
 
+    title.innerHTML = "Image Editor";
+
+    description.innerHTML =
+    "A modern Image Editor built using HTML, CSS and JavaScript with image upload, filters, brightness, saturation, grayscale, rotate, flip and download functionality.";
+
+    github.href =
+    "https://rohitmishra-devops.github.io/Image-Editor/";
+
+}
     else if(project === "login"){
 
         title.innerHTML = "Login System";
