@@ -1,3 +1,9 @@
+/* =========================================================
+   ROHIT MISHRA PORTFOLIO — FINAL CSS
+   ========================================================= */
+
+
+/* ================= RESET ================= */
 
 * {
     margin: 0;
@@ -12,13 +18,13 @@ html {
 
 body {
     background: #050805;
-    color: white;
+    color: #ffffff;
     overflow-x: hidden;
     min-height: 100vh;
 }
 
 
-/* ================= BACKGROUND GLOW ================= */
+/* ================= BACKGROUND ================= */
 
 body::before {
     content: "";
@@ -29,11 +35,11 @@ body::before {
 
     background: #00ff88;
 
-    opacity: .07;
+    opacity: 0.07;
 
     filter: blur(130px);
 
-    top: 10%;
+    top: 5%;
     left: 15%;
 
     z-index: -1;
@@ -67,23 +73,25 @@ header {
     padding: 18px 8%;
 
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 
-    background: rgba(5, 8, 5, .88);
+    background: rgba(5, 8, 5, 0.92);
 
-    backdrop-filter: blur(14px);
+    backdrop-filter: blur(15px);
 
-    border-bottom: 1px solid rgba(0, 255, 136, .08);
+    border-bottom: 1px solid rgba(0, 255, 136, 0.08);
 
-    z-index: 1000;
+    z-index: 5000;
 }
 
 
 /* LOGO */
 
 .logo {
-    font-size: 34px;
+    font-size: 35px;
 
     font-weight: 700;
 
@@ -92,25 +100,17 @@ header {
     letter-spacing: 2px;
 
     text-shadow:
-        0 0 10px rgba(0, 255, 136, .5);
+        0 0 15px rgba(0, 255, 136, 0.4);
 
     cursor: pointer;
-
-    transition: .3s;
-}
-
-.logo:hover {
-    transform: scale(1.08);
-
-    text-shadow:
-        0 0 25px #00ff88;
 }
 
 
-/* NAVIGATION */
+/* NAV */
 
 nav {
     display: flex;
+
     align-items: center;
 }
 
@@ -121,83 +121,92 @@ nav button {
 
     color: white;
 
-    font-size: 15px;
+    font-size: 16px;
 
     margin-left: 25px;
 
     cursor: pointer;
 
-    transition: .3s;
+    transition: 0.3s;
 }
 
 nav button:hover {
     color: #00ff88;
 
-    transform: translateY(-3px);
-
-    text-shadow:
-        0 0 10px #00ff88;
+    transform: translateY(-2px);
 }
 
 
-/* ================= PAGE SYSTEM ================= */
+/* =========================================================
+   PAGE SYSTEM
+   IMPORTANT: NO ABSOLUTE PAGE OVERLAP
+   ========================================================= */
 
 .page {
-    min-height: 100vh;
+    display: none;
 
     width: 100%;
 
-    position: absolute;
+    min-height: 100vh;
 
-    top: 0;
-    left: 0;
+    padding: 125px 8% 90px;
 
-    padding: 120px 8% 80px;
+    position: relative;
 
-    opacity: 0;
-
-    visibility: hidden;
-
-    transform: translateX(80px);
-
-    transition:
-        opacity .55s ease,
-        transform .55s ease,
-        visibility .55s ease;
-
-    overflow-y: auto;
+    flex-direction: column;
 }
 
 .page.active {
-    opacity: 1;
+    display: flex;
 
-    visibility: visible;
+    animation: pageOpen 0.45s ease;
+}
 
-    transform: translateX(0);
+@keyframes pageOpen {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
 }
 
 
 /* ================= HOME ================= */
 
 #home {
-    display: flex;
-
-    justify-content: space-between;
+    justify-content: center;
 
     align-items: center;
 
-    gap: 60px;
+    flex-direction: row;
+
+    gap: 70px;
 }
 
-
-/* HERO LEFT */
-
 .hero-left {
+    width: 55%;
+
     max-width: 680px;
 }
 
+.hero-right {
+    width: 45%;
 
-/* AVAILABLE BADGE */
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+/* BADGE */
 
 .badge {
     display: inline-block;
@@ -210,11 +219,11 @@ nav button:hover {
 
     color: #00ff88;
 
-    margin-bottom: 22px;
-
-    background: rgba(0, 255, 136, .05);
+    background: rgba(0, 255, 136, 0.05);
 
     font-size: 14px;
+
+    margin-bottom: 20px;
 
     animation: pulse 2.5s infinite;
 }
@@ -223,7 +232,7 @@ nav button:hover {
 
     50% {
         box-shadow:
-            0 0 25px rgba(0, 255, 136, .25);
+            0 0 25px rgba(0, 255, 136, 0.25);
     }
 
 }
@@ -242,34 +251,20 @@ nav button:hover {
 .hero-left h1 {
     font-size: 72px;
 
+    line-height: 1.1;
+
     color: #00ff88;
 
     letter-spacing: 2px;
 
-    line-height: 1.1;
-
-    animation:
-        titleGlow 2.5s infinite alternate;
-}
-
-@keyframes titleGlow {
-
-    from {
-        text-shadow:
-            0 0 8px rgba(0, 255, 136, .4);
-    }
-
-    to {
-        text-shadow:
-            0 0 30px rgba(0, 255, 136, .8);
-    }
-
+    text-shadow:
+        0 0 20px rgba(0, 255, 136, 0.3);
 }
 
 .hero-left h2 {
-    color: white;
-
     font-size: 28px;
+
+    color: white;
 
     margin-top: 12px;
 
@@ -277,15 +272,13 @@ nav button:hover {
 }
 
 .hero-left > p {
-    font-size: 17px;
+    color: #ccc;
 
     line-height: 1.8;
 
-    color: #ccc;
+    font-size: 17px;
 
     margin: 25px 0;
-
-    max-width: 650px;
 }
 
 
@@ -305,23 +298,18 @@ nav button:hover {
 
     border-radius: 30px;
 
-    font-size: 14px;
-
     font-weight: 600;
+
+    font-size: 14px;
 
     cursor: pointer;
 
     text-decoration: none;
 
-    transition: .3s;
+    transition: 0.3s;
 
-    position: relative;
-
-    overflow: hidden;
+    white-space: nowrap;
 }
-
-
-/* MAIN */
 
 .main-btn {
     border: none;
@@ -335,16 +323,13 @@ nav button:hover {
     transform: translateY(-4px);
 
     box-shadow:
-        0 0 25px rgba(0, 255, 136, .7);
+        0 0 25px rgba(0, 255, 136, 0.7);
 }
 
-
-/* OUTLINE */
-
 .outline-btn {
-    background: transparent;
-
     border: 2px solid #00ff88;
+
+    background: transparent;
 
     color: #00ff88;
 }
@@ -355,9 +340,6 @@ nav button:hover {
     color: #000;
 
     transform: translateY(-4px);
-
-    box-shadow:
-        0 0 25px rgba(0, 255, 136, .5);
 }
 
 
@@ -377,7 +359,7 @@ nav button:hover {
 .stats {
     display: flex;
 
-    gap: 18px;
+    gap: 15px;
 
     margin-top: 40px;
 
@@ -389,24 +371,24 @@ nav button:hover {
 
     padding: 15px 20px;
 
+    text-align: center;
+
     background: #101410;
+
+    border: 1px solid #1c2b1c;
 
     border-radius: 15px;
 
-    text-align: center;
-
-    border: 1px solid #1d3825;
-
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .stats div:hover {
-    transform: translateY(-8px);
+    transform: translateY(-7px);
 
     border-color: #00ff88;
 
     box-shadow:
-        0 0 20px rgba(0, 255, 136, .25);
+        0 0 20px rgba(0, 255, 136, 0.2);
 }
 
 .stats h2 {
@@ -416,44 +398,32 @@ nav button:hover {
 }
 
 .stats p {
-    margin: 0;
+    color: #aaa;
 
     font-size: 13px;
-
-    color: #aaa;
 }
 
 
 /* ================= PROFILE ================= */
-
-.hero-right {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-}
 
 .profile-3d {
     width: 360px;
 
     height: 360px;
 
-    border-radius: 50%;
-
     position: relative;
 
     display: flex;
 
+    align-items: center;
+
     justify-content: center;
 
-    align-items: center;
+    border-radius: 50%;
 
     animation: float 4s infinite ease-in-out;
 
-    transform-style: preserve-3d;
-
-    transition: .4s;
+    transition: 0.4s;
 }
 
 .profile-3d img {
@@ -461,16 +431,16 @@ nav button:hover {
 
     height: 320px;
 
-    border-radius: 50%;
-
     object-fit: cover;
+
+    border-radius: 50%;
 
     border: 5px solid #00ff88;
 
     z-index: 2;
 
     box-shadow:
-        0 0 35px rgba(0, 255, 136, .5);
+        0 0 35px rgba(0, 255, 136, 0.45);
 }
 
 .glow {
@@ -485,12 +455,12 @@ nav button:hover {
 
     filter: blur(80px);
 
-    opacity: .25;
+    opacity: 0.25;
 }
 
 .profile-3d:hover {
     transform:
-        rotateY(12deg)
+        rotateY(15deg)
         rotateX(8deg)
         scale(1.04);
 }
@@ -516,14 +486,14 @@ nav button:hover {
     margin-bottom: 15px;
 
     text-shadow:
-        0 0 15px rgba(0, 255, 136, .25);
+        0 0 15px rgba(0, 255, 136, 0.25);
 }
 
 
-/* ================= SECTION SUBTITLE ================= */
+/* ================= SUBTITLE ================= */
 
 .section-subtitle {
-    max-width: 680px;
+    max-width: 700px;
 
     margin: 0 auto 45px;
 
@@ -549,68 +519,35 @@ nav button:hover {
     display: grid;
 
     grid-template-columns:
-        repeat(auto-fit, minmax(300px, 1fr));
+        repeat(2, minmax(0, 1fr));
 
     gap: 28px;
 }
 
 
-/* ================= CARDS ================= */
+/* ================= CARD ================= */
 
 .card {
-    background:
-        linear-gradient(
-            145deg,
-            #101410,
-            #0b100c
-        );
-
-    padding: 30px;
-
-    border-radius: 22px;
-
-    text-align: center;
-
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease,
-        border .35s ease;
-
-    border: 1px solid #1c2b1c;
-
     position: relative;
 
     overflow: hidden;
 
-    transform-style: preserve-3d;
-}
+    background:
+        linear-gradient(
+            145deg,
+            #101410,
+            #0a0e0b
+        );
 
-.card::before {
-    content: "";
+    border: 1px solid #1c2b1c;
 
-    position: absolute;
+    border-radius: 22px;
 
-    width: 130px;
+    padding: 30px;
 
-    height: 130px;
+    text-align: center;
 
-    background: #00ff88;
-
-    filter: blur(75px);
-
-    top: -55px;
-
-    right: -55px;
-
-    opacity: 0;
-
-    transition: .4s;
-
-    pointer-events: none;
-}
-
-.card:hover::before {
-    opacity: .22;
+    transition: 0.35s;
 }
 
 .card:hover {
@@ -619,20 +556,16 @@ nav button:hover {
     border-color: #00ff88;
 
     box-shadow:
-        0 15px 40px rgba(0, 255, 136, .15);
+        0 15px 40px rgba(0, 255, 136, 0.12);
 }
 
 
-/* CARD ICON */
+/* SKILL ICON */
 
 .card > i {
     font-size: 42px;
 
     color: #00ff88;
-
-    display: inline-block;
-
-    margin-bottom: 5px;
 }
 
 .card h2 {
@@ -650,22 +583,40 @@ nav button:hover {
 }
 
 
-/* ================= PROJECT CARDS ================= */
+/* ================= PROJECT CARD ================= */
 
 .project-card {
     text-align: left;
 
-    min-height: 390px;
+    min-height: 400px;
 
     display: flex;
 
     flex-direction: column;
 }
 
-.project-card:hover {
-    transform:
-        translateY(-12px)
-        scale(1.01);
+.project-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 160px;
+    height: 160px;
+
+    background: #00ff88;
+
+    filter: blur(90px);
+
+    opacity: 0;
+
+    right: -70px;
+    top: -70px;
+
+    transition: 0.4s;
+}
+
+.project-card:hover::before {
+    opacity: 0.12;
 }
 
 
@@ -684,21 +635,17 @@ nav button:hover {
 
     border-radius: 18px;
 
-    background:
-        rgba(0, 255, 136, .08);
+    background: rgba(0, 255, 136, 0.07);
 
-    border:
-        1px solid rgba(0, 255, 136, .2);
+    border: 1px solid rgba(0, 255, 136, 0.15);
 
     margin-bottom: 18px;
-
-    color: #00ff88;
-
-    font-size: 30px;
 }
 
 .project-icon i {
     color: #00ff88;
+
+    font-size: 31px;
 }
 
 
@@ -713,13 +660,11 @@ nav button:hover {
 
     border-radius: 20px;
 
-    background:
-        rgba(0, 255, 136, .07);
-
-    border:
-        1px solid rgba(0, 255, 136, .15);
-
     color: #00ff88;
+
+    background: rgba(0, 255, 136, 0.06);
+
+    border: 1px solid rgba(0, 255, 136, 0.15);
 
     font-size: 11px;
 
@@ -731,19 +676,19 @@ nav button:hover {
 .project-card h2 {
     font-size: 25px;
 
-    margin: 4px 0 10px;
+    margin: 4px 0 12px;
 }
 
 .project-card p {
-    font-size: 14px;
+    color: #aaa;
 
     line-height: 1.8;
 
-    color: #aaa;
+    font-size: 14px;
 }
 
 
-/* PROJECT TECHNOLOGIES */
+/* PROJECT TECH */
 
 .project-tech {
     display: flex;
@@ -752,7 +697,7 @@ nav button:hover {
 
     gap: 8px;
 
-    margin: 18px 0;
+    margin: 20px 0;
 }
 
 .project-tech span {
@@ -760,11 +705,9 @@ nav button:hover {
 
     border-radius: 8px;
 
-    background:
-        rgba(255, 255, 255, .05);
+    background: rgba(255, 255, 255, 0.05);
 
-    border:
-        1px solid rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, 0.07);
 
     color: #bbb;
 
@@ -782,12 +725,10 @@ nav button:hover {
     gap: 12px;
 
     margin-top: auto;
-
-    padding-top: 10px;
 }
 
 
-/* GITHUB ICON BUTTON */
+/* GITHUB */
 
 .project-github {
     width: 45px;
@@ -802,11 +743,9 @@ nav button:hover {
 
     border-radius: 12px;
 
-    background:
-        rgba(255, 255, 255, .06);
+    background: rgba(255, 255, 255, 0.05);
 
-    border:
-        1px solid rgba(255, 255, 255, .1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 
     color: white;
 
@@ -814,7 +753,7 @@ nav button:hover {
 
     font-size: 21px;
 
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .project-github:hover {
@@ -823,20 +762,23 @@ nav button:hover {
     border-color: #00ff88;
 
     transform: translateY(-3px);
-
-    box-shadow:
-        0 0 15px rgba(0, 255, 136, .25);
 }
 
 
-/* ================= PROJECT MODAL ================= */
+/* =========================================================
+   PROJECT MODAL
+   ========================================================= */
 
 .project-modal {
     position: fixed;
 
     inset: 0;
 
-    z-index: 9999;
+    width: 100vw;
+
+    height: 100vh;
+
+    z-index: 10000;
 
     display: flex;
 
@@ -844,10 +786,9 @@ nav button:hover {
 
     justify-content: center;
 
-    padding: 20px;
+    padding: 25px;
 
-    background:
-        rgba(0, 0, 0, .78);
+    background: rgba(0, 0, 0, 0.82);
 
     backdrop-filter: blur(14px);
 
@@ -855,15 +796,19 @@ nav button:hover {
 
     visibility: hidden;
 
+    pointer-events: none;
+
     transition:
-        opacity .3s ease,
-        visibility .3s ease;
+        opacity 0.3s ease,
+        visibility 0.3s ease;
 }
 
 .project-modal.show {
     opacity: 1;
 
     visibility: visible;
+
+    pointer-events: auto;
 }
 
 
@@ -874,13 +819,13 @@ nav button:hover {
 
     width: min(680px, 100%);
 
-    max-height: 90vh;
+    max-height: 88vh;
 
     overflow-y: auto;
 
     padding: 42px;
 
-    border-radius: 26px;
+    border-radius: 25px;
 
     background:
         linear-gradient(
@@ -889,19 +834,18 @@ nav button:hover {
             #080b08
         );
 
-    border:
-        1px solid rgba(0, 255, 136, .2);
+    border: 1px solid rgba(0, 255, 136, 0.25);
 
     box-shadow:
-        0 30px 100px rgba(0, 0, 0, .7),
-        0 0 40px rgba(0, 255, 136, .08);
+        0 30px 100px rgba(0, 0, 0, 0.8),
+        0 0 50px rgba(0, 255, 136, 0.08);
 
     transform:
-        translateY(35px)
-        scale(.95);
+        translateY(30px)
+        scale(0.95);
 
     transition:
-        transform .35s ease;
+        transform 0.35s ease;
 }
 
 .project-modal.show
@@ -917,9 +861,9 @@ nav button:hover {
 .modal-close {
     position: absolute;
 
-    top: 18px;
+    top: 17px;
 
-    right: 18px;
+    right: 17px;
 
     width: 42px;
 
@@ -929,8 +873,7 @@ nav button:hover {
 
     border-radius: 50%;
 
-    background:
-        rgba(255, 255, 255, .06);
+    background: rgba(255, 255, 255, 0.07);
 
     color: white;
 
@@ -938,13 +881,15 @@ nav button:hover {
 
     cursor: pointer;
 
-    transition: .3s;
+    z-index: 2;
+
+    transition: 0.3s;
 }
 
 .modal-close:hover {
     background: #00ff88;
 
-    color: black;
+    color: #000;
 
     transform: rotate(90deg);
 }
@@ -965,11 +910,9 @@ nav button:hover {
 
     border-radius: 20px;
 
-    background:
-        rgba(0, 255, 136, .08);
+    background: rgba(0, 255, 136, 0.07);
 
-    border:
-        1px solid rgba(0, 255, 136, .2);
+    border: 1px solid rgba(0, 255, 136, 0.2);
 
     color: #00ff88;
 
@@ -979,7 +922,7 @@ nav button:hover {
 }
 
 
-/* MODAL TITLE */
+/* MODAL TEXT */
 
 .project-modal-content h1 {
     color: white;
@@ -992,24 +935,22 @@ nav button:hover {
 .project-modal-content > p {
     color: #aaa;
 
-    line-height: 1.9;
-
     font-size: 15px;
+
+    line-height: 1.9;
 }
 
 
-/* MODAL BUTTONS */
+/* MODAL ACTIONS */
 
 .modal-actions {
     display: flex;
 
-    align-items: center;
-
     gap: 12px;
 
-    margin-top: 30px;
-
     flex-wrap: wrap;
+
+    margin-top: 30px;
 }
 
 .modal-actions a {
@@ -1017,40 +958,23 @@ nav button:hover {
 }
 
 
-/* PREVENT SCROLL */
+/* MODAL SCROLLBAR */
+
+.project-modal-content::-webkit-scrollbar {
+    width: 5px;
+}
+
+.project-modal-content::-webkit-scrollbar-thumb {
+    background: #00ff88;
+
+    border-radius: 10px;
+}
+
+
+/* PREVENT BODY SCROLL */
 
 body.modal-open {
     overflow: hidden;
-}
-
-
-/* ================= CONTACT ================= */
-
-#contact {
-    display: flex;
-
-    justify-content: center;
-
-    flex-direction: column;
-
-    align-items: center;
-}
-
-#contact .box {
-    width: min(700px, 100%);
-}
-
-
-/* ================= ABOUT / SKILLS / PROJECTS ================= */
-
-#about,
-#skills,
-#projects {
-    display: flex;
-
-    flex-direction: column;
-
-    align-items: center;
 }
 
 
@@ -1061,6 +985,10 @@ body.modal-open {
 
     max-width: 800px;
 
+    margin: 0 auto;
+
+    padding: 38px;
+
     background:
         linear-gradient(
             145deg,
@@ -1068,118 +996,71 @@ body.modal-open {
             #0b100c
         );
 
-    padding: 38px;
+    border: 1px solid #1c2b1c;
 
     border-radius: 22px;
 
-    border:
-        1px solid #1c2b1c;
-
     box-shadow:
-        0 0 30px rgba(0, 61, 32, .4);
+        0 0 30px rgba(0, 61, 32, 0.35);
 }
 
 .box p {
-    line-height: 2;
-
     color: #ddd;
+
+    line-height: 2;
 }
 
 .box a {
     color: #00ff88;
 
     text-decoration: none;
-
-    transition: .3s;
 }
 
-.box a:hover {
-    text-shadow:
-        0 0 10px #00ff88;
+
+/* ================= CONTACT ================= */
+
+#contact {
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+/* ================= ABOUT ================= */
+
+#about {
+    align-items: center;
+}
+
+#about .box {
+    margin-top: 10px;
 }
 
 
 /* ================= FOOTER ================= */
 
 footer {
-    position: absolute;
+    position: relative;
 
     width: 100%;
 
-    bottom: 0;
-
     text-align: center;
 
-    padding: 20px;
+    padding: 22px;
 
     background: #020402;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
 
     color: #777;
 
     font-size: 13px;
-
-    border-top:
-        1px solid rgba(255, 255, 255, .04);
 }
 
 
-/* ================= CURSOR GLOW ================= */
-
-.cursor-glow {
-    position: fixed;
-
-    width: 25px;
-
-    height: 25px;
-
-    background: #00ff88;
-
-    border-radius: 50%;
-
-    pointer-events: none;
-
-    transform:
-        translate(-50%, -50%);
-
-    filter: blur(10px);
-
-    z-index: 99999;
-
-    opacity: .6;
-}
-
-
-/* ================= SCROLLBAR ================= */
-
-::-webkit-scrollbar {
-    width: 7px;
-}
-
-::-webkit-scrollbar-track {
-    background: #050805;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #00ff88;
-
-    border-radius: 20px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #00cc6d;
-}
-
-
-/* ================= SELECTION ================= */
-
-::selection {
-    background: #00ff88;
-
-    color: #000;
-}
-
-
-/* ================= MOBILE ================= */
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 @media (max-width: 900px) {
 
@@ -1191,8 +1072,6 @@ footer {
 
     nav {
         margin-top: 12px;
-
-        display: flex;
 
         flex-wrap: wrap;
 
@@ -1211,25 +1090,25 @@ footer {
 
         text-align: center;
 
-        justify-content: center;
+        gap: 45px;
 
-        padding-top: 150px;
+        padding-top: 145px;
     }
 
     .hero-left {
-        max-width: 100%;
+        width: 100%;
+    }
+
+    .hero-right {
+        width: 100%;
     }
 
     .hero-left h1 {
-        font-size: 52px;
+        font-size: 55px;
     }
 
     .hero-left h2 {
         font-size: 24px;
-    }
-
-    .hero-left > p {
-        font-size: 15px;
     }
 
     .hero-buttons {
@@ -1241,6 +1120,7 @@ footer {
     .stats {
         justify-content: center;
     }
+
 
     .profile-3d {
         width: 300px;
@@ -1254,20 +1134,19 @@ footer {
         height: 265px;
     }
 
-    .page {
-        padding-left: 5%;
 
-        padding-right: 5%;
+    .grid {
+        grid-template-columns: 1fr;
     }
 
 }
 
 
+/* ================= SMALL MOBILE ================= */
+
 @media (max-width: 600px) {
 
     header {
-        position: fixed;
-
         padding: 12px 4%;
     }
 
@@ -1281,17 +1160,20 @@ footer {
         margin: 3px 5px;
     }
 
+
     .page {
         padding:
-            125px 5% 70px;
+            125px 5% 60px;
     }
+
 
     .page > h1 {
         font-size: 34px;
     }
 
+
     .hero-left h3 {
-        font-size: 22px;
+        font-size: 21px;
     }
 
     .hero-left h1 {
@@ -1301,6 +1183,11 @@ footer {
     .hero-left h2 {
         font-size: 20px;
     }
+
+    .hero-left > p {
+        font-size: 14px;
+    }
+
 
     .hero-buttons {
         flex-direction: column;
@@ -1315,60 +1202,62 @@ footer {
         max-width: 280px;
     }
 
+
     .stats {
-        gap: 10px;
+        gap: 8px;
     }
 
     .stats div {
-        min-width: 100px;
+        min-width: 95px;
 
-        padding: 12px 10px;
+        padding: 12px 8px;
     }
 
-    .stats h2 {
-        font-size: 20px;
-    }
 
     .profile-3d {
-        width: 250px;
+        width: 245px;
 
-        height: 250px;
+        height: 245px;
     }
 
     .profile-3d img {
-        width: 220px;
+        width: 215px;
 
-        height: 220px;
+        height: 215px;
     }
 
-    .grid {
-        grid-template-columns: 1fr;
-
-        gap: 20px;
-    }
 
     .project-card {
         min-height: auto;
+
+        padding: 25px;
     }
+
+
+    .project-actions {
+        flex-wrap: wrap;
+    }
+
 
     .project-modal {
         padding: 12px;
     }
 
+
     .project-modal-content {
-        padding: 30px 22px;
+        padding: 32px 22px;
 
         border-radius: 20px;
     }
+
 
     .project-modal-content h1 {
         font-size: 25px;
     }
 
+
     .modal-actions {
         flex-direction: column;
-
-        align-items: stretch;
     }
 
     .modal-actions a {
@@ -1377,20 +1266,20 @@ footer {
         justify-content: center;
     }
 
+
     .box {
         padding: 25px 20px;
     }
 
-    footer {
-        position: relative;
 
-        margin-top: 30px;
+    footer {
+        font-size: 11px;
     }
 
 }
 
 
-/* ================= SMALL MOBILE ================= */
+/* ================= VERY SMALL ================= */
 
 @media (max-width: 380px) {
 
@@ -1408,10 +1297,6 @@ footer {
         width: 195px;
 
         height: 195px;
-    }
-
-    .stats div {
-        min-width: 90px;
     }
 
 }
