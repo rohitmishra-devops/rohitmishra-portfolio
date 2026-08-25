@@ -1,615 +1,944 @@
-// ===============================
+// =========================================================
+// ROHIT MISHRA PORTFOLIO
+// FINAL JAVASCRIPT
+// =========================================================
+
+
+// =========================================================
 // PAGE NAVIGATION
-// ===============================
+// =========================================================
 
-function showPage(pageId){
+function showPage(pageId) {
 
-    let pages = document.querySelectorAll(".page");
+    const pages = document.querySelectorAll(".page");
 
-    pages.forEach((page)=>{
+    pages.forEach((page) => {
         page.classList.remove("active");
     });
 
-    let selectedPage = document.getElementById(pageId);
+    const selectedPage = document.getElementById(pageId);
 
-    if(selectedPage){
+    if (selectedPage) {
         selectedPage.classList.add("active");
     }
 
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
+    // Update active navbar button
+    const navButtons = document.querySelectorAll("nav button");
+
+    navButtons.forEach((button) => {
+        button.classList.remove("active");
     });
 
+    const activeButton = document.querySelector(
+        `nav button[onclick="showPage('${pageId}')"]`
+    );
+
+    if (activeButton) {
+        activeButton.classList.add("active");
+    }
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
 
 
-
-
-
-// ===============================
-// ACTIVE NAV BUTTON
-// ===============================
-
-let navButtons = document.querySelectorAll("nav button");
-
-navButtons.forEach((btn)=>{
-
-    btn.addEventListener("click",()=>{
-
-        navButtons.forEach((b)=>{
-            b.classList.remove("active");
-        });
-
-        btn.classList.add("active");
-
-    });
-
-});
-
-
-
-
-
-
-// ===============================
+// =========================================================
 // TYPING EFFECT
-// ===============================
+// =========================================================
 
 const words = [
-
-"Full Stack Developer...",
-
-"Python Developer...",
-
-"Web Developer...",
-
+    "Full Stack Developer...",
+    "Python Developer...",
+    "AI Developer...",
+    "Web Developer..."
 ];
 
 let wordIndex = 0;
-
 let letterIndex = 0;
-
-let currentWord = "";
-
 let isDeleting = false;
 
-const typingElement = document.querySelector(".hero-left h2");
+const typingElement =
+    document.querySelector(".hero-left h2");
 
-function typingEffect(){
 
-    if(!typingElement) return;
+function typingEffect() {
 
-    currentWord = words[wordIndex];
+    if (!typingElement) return;
 
-    if(isDeleting){
+    const currentWord = words[wordIndex];
 
-        typingElement.innerHTML =
-        currentWord.substring(0,letterIndex--);
+    if (isDeleting) {
+
+        typingElement.textContent =
+            currentWord.substring(0, letterIndex);
+
+        letterIndex--;
+
+    } else {
+
+        typingElement.textContent =
+            currentWord.substring(0, letterIndex);
+
+        letterIndex++;
 
     }
 
-    else{
+    let speed = isDeleting ? 60 : 110;
 
-        typingElement.innerHTML =
-        currentWord.substring(0,letterIndex++);
 
-    }
+    // Word completely typed
+    if (
+        !isDeleting &&
+        letterIndex > currentWord.length
+    ) {
 
-    let speed = isDeleting ? 60 : 120;
-
-    if(!isDeleting && letterIndex === currentWord.length+1){
-
-        speed = 1200;
+        speed = 1300;
 
         isDeleting = true;
-
     }
 
-    if(isDeleting && letterIndex === 0){
+
+    // Word completely deleted
+    if (
+        isDeleting &&
+        letterIndex < 0
+    ) {
 
         isDeleting = false;
 
+        letterIndex = 0;
+
         wordIndex++;
 
-        if(wordIndex >= words.length){
-
+        if (wordIndex >= words.length) {
             wordIndex = 0;
-
         }
 
+        speed = 400;
     }
 
-    setTimeout(typingEffect,speed);
 
+    setTimeout(
+        typingEffect,
+        speed
+    );
 }
 
 typingEffect();
 
 
+// =========================================================
+// PROJECT DATA
+// =========================================================
+
+const projectData = {
+
+    ai: {
+
+        title: "AI Career Assistant",
+
+        description:
+            "An AI-powered career platform that helps users analyze resumes, explore suitable career paths, prepare for interviews and receive personalized career guidance.",
+
+        live:
+            "#",
+
+        github:
+            "https://github.com/rohitmishra-devops/ai-career-assistant-platform",
+
+        icon:
+            "ri-robot-2-fill"
+
+    },
 
 
+    hiregenie: {
 
+        title: "HireGenie",
 
+        description:
+            "An AI-integrated freelance marketplace designed to connect clients and freelancers with intelligent matching, project management and modern web experiences.",
 
-// ===============================
-// FLOAT EFFECT
-// ===============================
+        live:
+            "https://hiregenie-go83.onrender.com",
 
-let profile = document.querySelector(".profile-3d");
+        github:
+            "https://github.com/rohitmishra-devops/HireGenie",
 
-if(profile){
-
-setInterval(()=>{
-
-profile.animate([
-
-{
-
-transform:"translateY(0px)"
-
-},
-
-{
-
-transform:"translateY(-10px)"
-
-},
-
-{
-
-transform:"translateY(0px)"
-
-}
-
-],{
-
-duration:3000,
-
-iterations:1
-
-});
-
-},3000);
-
-}
-// ===============================
-// PROJECT DETAILS
-// ===============================
-
-function openProject(project){
-
-    const title = document.getElementById("project-title");
-    const description = document.getElementById("project-description");
-    const github = document.getElementById("github-link");
-
-    if(project === "amazon"){
-
-        title.innerHTML = "Amazon Clone";
-
-        description.innerHTML =
-        "A responsive Amazon Clone built using HTML, CSS and JavaScript with a modern UI and responsive layout.";
-
-        github.href =
-        "https://github.com/rohitmishra-devops";
+        icon:
+            "ri-briefcase-4-fill"
 
     }
 
-    else if(project === "ai"){
+};
 
-    title.innerHTML = "AI Career Assistant Platform";
 
-    description.innerHTML =
-    "An AI-powered Career Assistant Platform built to help users analyze resumes, discover suitable career paths, prepare for interviews, and receive personalized job recommendations.";
+// =========================================================
+// PROJECT POPUP
+// =========================================================
 
-    github.href =
-    "https://github.com/rohitmishra-devops/ai-career-assistant-platform";
+function openProject(project) {
 
-}
+    const data =
+        projectData[project];
 
-    else if(project === "login"){
-
-        title.innerHTML = "Login System";
-
-        description.innerHTML =
-        "A Login Authentication System built using Python and MySQL with secure database connectivity.";
-
-        github.href =
-        "https://github.com/rohitmishra-devops/login-system";
-
+    if (!data) {
+        return;
     }
 
-    showPage("project-detail");
 
+    const modal =
+        document.getElementById("projectModal");
+
+    const title =
+        document.getElementById("modalTitle");
+
+    const description =
+        document.getElementById("modalDescription");
+
+    const icon =
+        document.getElementById("modalIcon");
+
+    const liveButton =
+        document.getElementById("liveProject");
+
+    const githubButton =
+        document.getElementById("githubProject");
+
+
+    if (!modal) {
+        console.error(
+            "Project modal not found in HTML."
+        );
+
+        return;
+    }
+
+
+    // Title
+    if (title) {
+        title.textContent =
+            data.title;
+    }
+
+
+    // Description
+    if (description) {
+        description.textContent =
+            data.description;
+    }
+
+
+    // Icon
+    if (icon) {
+
+        icon.className =
+            data.icon;
+    }
+
+
+    // Live Project
+    if (liveButton) {
+
+        liveButton.href =
+            data.live;
+
+        liveButton.target =
+            "_blank";
+
+        liveButton.rel =
+            "noopener noreferrer";
+
+
+        // AI live link not added yet
+        if (
+            !data.live ||
+            data.live === "#"
+        ) {
+
+            liveButton.style.display =
+                "none";
+
+        } else {
+
+            liveButton.style.display =
+                "inline-flex";
+        }
+    }
+
+
+    // GitHub
+    if (githubButton) {
+
+        githubButton.href =
+            data.github;
+
+        githubButton.target =
+            "_blank";
+
+        githubButton.rel =
+            "noopener noreferrer";
+    }
+
+
+    // Open modal
+    modal.classList.add("show");
+
+    document.body.classList.add(
+        "modal-open"
+    );
 }
 
 
+// =========================================================
+// CLOSE PROJECT POPUP
+// =========================================================
+
+function closeProject() {
+
+    const modal =
+        document.getElementById(
+            "projectModal"
+        );
+
+    if (!modal) {
+        return;
+    }
+
+    modal.classList.remove(
+        "show"
+    );
+
+    document.body.classList.remove(
+        "modal-open"
+    );
+}
 
 
+// =========================================================
+// CLOSE MODAL WHEN CLICKING OUTSIDE
+// =========================================================
+
+document.addEventListener(
+    "click",
+    function (event) {
+
+        const modal =
+            document.getElementById(
+                "projectModal"
+            );
+
+        if (!modal) {
+            return;
+        }
+
+        if (
+            event.target === modal
+        ) {
+
+            closeProject();
+        }
+
+    }
+);
 
 
-// ===============================
-// BUTTON CLICK ANIMATION
-// ===============================
+// =========================================================
+// ESC KEY CLOSE MODAL
+// =========================================================
 
-let buttons = document.querySelectorAll("button");
+document.addEventListener(
+    "keydown",
+    function (event) {
 
-buttons.forEach((button)=>{
+        if (
+            event.key === "Escape"
+        ) {
 
-    button.addEventListener("click",(e)=>{
+            closeProject();
+        }
 
-        let ripple = document.createElement("span");
+    }
+);
 
-        ripple.className = "ripple";
 
-        let x = e.clientX - button.offsetLeft;
+// =========================================================
+// BUTTON RIPPLE EFFECT
+// =========================================================
 
-        let y = e.clientY - button.offsetTop;
+document.addEventListener(
+    "click",
+    function (event) {
 
-        ripple.style.left = x + "px";
+        const button =
+            event.target.closest(
+                "button"
+            );
 
-        ripple.style.top = y + "px";
+        if (!button) {
+            return;
+        }
 
-        button.appendChild(ripple);
 
-        setTimeout(()=>{
+        const ripple =
+            document.createElement(
+                "span"
+            );
+
+        ripple.className =
+            "ripple";
+
+
+        const rect =
+            button.getBoundingClientRect();
+
+
+        const x =
+            event.clientX -
+            rect.left;
+
+
+        const y =
+            event.clientY -
+            rect.top;
+
+
+        ripple.style.left =
+            x + "px";
+
+        ripple.style.top =
+            y + "px";
+
+
+        button.appendChild(
+            ripple
+        );
+
+
+        setTimeout(() => {
 
             ripple.remove();
 
-        },600);
+        }, 600);
 
-    });
-
-});
-
+    }
+);
 
 
-
-
-
-// ===============================
-// GITHUB BUTTON HOVER
-// ===============================
-
-const githubButton = document.getElementById("github-link");
-
-if(githubButton){
-
-    githubButton.addEventListener("mouseenter",()=>{
-
-        githubButton.style.transform = "scale(1.05)";
-
-    });
-
-    githubButton.addEventListener("mouseleave",()=>{
-
-        githubButton.style.transform = "scale(1)";
-
-    });
-
-}
-
-// ===============================
+// =========================================================
 // 3D CARD EFFECT
-// ===============================
+// =========================================================
 
-const cards = document.querySelectorAll(".card");
-
-cards.forEach((card)=>{
-
-    card.addEventListener("mousemove",(e)=>{
-
-        const rect = card.getBoundingClientRect();
-
-        const x = e.clientX - rect.left;
-
-        const y = e.clientY - rect.top;
-
-        const rotateX = -((y - rect.height/2)/12);
-
-        const rotateY = ((x - rect.width/2)/12);
-
-        card.style.transform =
-        `perspective(1000px)
-        rotateX(${rotateX}deg)
-        rotateY(${rotateY}deg)
-        scale(1.05)`;
-
-    });
-
-    card.addEventListener("mouseleave",()=>{
-
-        card.style.transform =
-        "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
-
-    });
-
-});
+const cards =
+    document.querySelectorAll(
+        ".card"
+    );
 
 
+cards.forEach((card) => {
 
 
+    card.addEventListener(
+        "mousemove",
+        function (event) {
+
+            const rect =
+                card.getBoundingClientRect();
 
 
-// ===============================
-// CURSOR GLOW
-// ===============================
-
-const cursor = document.createElement("div");
-
-cursor.className = "cursor-glow";
-
-document.body.appendChild(cursor);
-
-document.addEventListener("mousemove",(e)=>{
-
-    cursor.style.left = e.clientX + "px";
-
-    cursor.style.top = e.clientY + "px";
-
-});
+            const x =
+                event.clientX -
+                rect.left;
 
 
+            const y =
+                event.clientY -
+                rect.top;
 
 
+            const rotateX =
+                -(
+                    (y - rect.height / 2)
+                    / 18
+                );
 
 
-// ===============================
-// CARD FADE-IN ANIMATION
-// ===============================
+            const rotateY =
+                (
+                    (x - rect.width / 2)
+                    / 18
+                );
 
-const observer = new IntersectionObserver((entries)=>{
 
-    entries.forEach((entry)=>{
-
-        if(entry.isIntersecting){
-
-            entry.target.style.opacity = "1";
-
-            entry.target.style.transform = "translateY(0px)";
+            card.style.transform =
+                `perspective(1000px)
+                 rotateX(${rotateX}deg)
+                 rotateY(${rotateY}deg)
+                 translateY(-8px)
+                 scale(1.01)`;
 
         }
+    );
 
-    });
 
-},{
-    threshold:0.2
-});
+    card.addEventListener(
+        "mouseleave",
+        function () {
 
-cards.forEach((card)=>{
+            card.style.transform =
+                "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0) scale(1)";
 
-    card.style.opacity = "0";
-
-    card.style.transform = "translateY(50px)";
-
-    card.style.transition = "0.7s";
-
-    observer.observe(card);
+        }
+    );
 
 });
 
 
+// =========================================================
+// CURSOR GLOW
+// =========================================================
+
+const cursor =
+    document.createElement(
+        "div"
+    );
+
+cursor.className =
+    "cursor-glow";
+
+document.body.appendChild(
+    cursor
+);
 
 
+document.addEventListener(
+    "mousemove",
+    function (event) {
+
+        cursor.style.left =
+            event.clientX + "px";
+
+        cursor.style.top =
+            event.clientY + "px";
+
+    }
+);
 
 
-// ===============================
-// HERO PARALLAX
-// ===============================
+// =========================================================
+// HERO PROFILE PARALLAX
+// =========================================================
 
-const hero = document.querySelector(".profile-3d");
-
-document.addEventListener("mousemove",(e)=>{
-
-    if(!hero) return;
-
-    let x = (window.innerWidth/2 - e.clientX)/40;
-
-    let y = (window.innerHeight/2 - e.clientY)/40;
-
-    hero.style.transform =
-    `translate(${x}px,${y}px)`;
-
-});
+const heroProfile =
+    document.querySelector(
+        ".profile-3d"
+    );
 
 
+document.addEventListener(
+    "mousemove",
+    function (event) {
+
+        if (!heroProfile) {
+            return;
+        }
 
 
+        // Don't move profile too much
+        const x =
+            (window.innerWidth / 2 -
+                event.clientX) / 80;
 
 
-// ===============================
-// LOGO ANIMATION
-// ===============================
+        const y =
+            (window.innerHeight / 2 -
+                event.clientY) / 80;
 
-const logo = document.querySelector(".logo");
 
-if(logo){
+        heroProfile.style.setProperty(
+            "--mouse-x",
+            `${x}px`
+        );
 
-logo.addEventListener("mouseenter",()=>{
+        heroProfile.style.setProperty(
+            "--mouse-y",
+            `${y}px`
+        );
 
-logo.style.transform="rotate(-8deg) scale(1.1)";
+    }
+);
 
-});
 
-logo.addEventListener("mouseleave",()=>{
+// =========================================================
+// PROFILE FLOAT EFFECT
+// =========================================================
 
-logo.style.transform="rotate(0deg) scale(1)";
+if (heroProfile) {
 
-});
+    let floatDirection = 1;
 
+    setInterval(() => {
+
+        heroProfile.animate(
+
+            [
+                {
+                    transform:
+                        `translate(
+                            var(--mouse-x, 0px),
+                            var(--mouse-y, 0px)
+                        )`
+                },
+
+                {
+                    transform:
+                        `translate(
+                            var(--mouse-x, 0px),
+                            calc(
+                                var(--mouse-y, 0px) - 10px
+                            )
+                        )`
+                },
+
+                {
+                    transform:
+                        `translate(
+                            var(--mouse-x, 0px),
+                            var(--mouse-y, 0px)
+                        )`
+                }
+
+            ],
+
+            {
+                duration: 3000,
+                iterations: 1
+            }
+
+        );
+
+        floatDirection *= -1;
+
+    }, 3000);
 }
-// ===============================
-// PRELOADER
-// ===============================
-
-window.addEventListener("load",()=>{
-
-    document.body.classList.add("loaded");
-
-});
 
 
-
-
-
-
-// ===============================
-// NAVBAR SHADOW ON SCROLL
-// ===============================
-
-const header = document.querySelector("header");
-
-window.addEventListener("scroll",()=>{
-
-    if(window.scrollY > 30){
-
-        header.style.boxShadow =
-        "0 8px 25px rgba(0,255,136,.25)";
-
-        header.style.background =
-        "rgba(5,7,11,.92)";
-
-    }
-
-    else{
-
-        header.style.boxShadow = "none";
-
-        header.style.background =
-        "rgba(5,7,11,.65)";
-
-    }
-
-});
-
-
-
-
-
-
-// ===============================
-// SCROLL PROGRESS BAR
-// ===============================
-
-const progress = document.createElement("div");
-
-progress.style.position = "fixed";
-progress.style.top = "0";
-progress.style.left = "0";
-progress.style.height = "4px";
-progress.style.width = "0%";
-progress.style.background = "#00ff88";
-progress.style.zIndex = "99999";
-progress.style.transition = "width .1s";
-
-document.body.appendChild(progress);
-
-window.addEventListener("scroll",()=>{
-
-    let totalHeight =
-    document.documentElement.scrollHeight -
-    document.documentElement.clientHeight;
-
-    let scroll =
-    (window.scrollY / totalHeight) * 100;
-
-    progress.style.width = scroll + "%";
-
-});
-
-
-
-
-
-
-// ===============================
-// SCROLL REVEAL
-// ===============================
+// =========================================================
+// CARD REVEAL
+// =========================================================
 
 const revealElements =
-document.querySelectorAll(".box,.card,.stats div");
+    document.querySelectorAll(
+        ".card, .box, .stats div"
+    );
+
 
 const revealObserver =
-new IntersectionObserver((entries)=>{
+    new IntersectionObserver(
 
-    entries.forEach((entry)=>{
+        (entries) => {
 
-        if(entry.isIntersecting){
+            entries.forEach(
+                (entry) => {
 
-            entry.target.style.opacity = "1";
-            entry.target.style.transform =
-            "translateY(0)";
+                    if (
+                        entry.isIntersecting
+                    ) {
 
+                        entry.target.style.opacity =
+                            "1";
+
+                        entry.target.style.transform =
+                            "translateY(0)";
+
+                        revealObserver.unobserve(
+                            entry.target
+                        );
+                    }
+
+                }
+            );
+
+        },
+
+        {
+            threshold: 0.12
         }
 
-    });
-
-},{
-    threshold:0.15
-});
-
-revealElements.forEach((element)=>{
-
-    element.style.opacity = "0";
-
-    element.style.transform =
-    "translateY(40px)";
-
-    element.style.transition =
-    ".8s ease";
-
-    revealObserver.observe(element);
-
-});
+    );
 
 
+revealElements.forEach(
+    (element) => {
+
+        element.style.opacity =
+            "0";
+
+        element.style.transform =
+            "translateY(35px)";
+
+        element.style.transition =
+            "opacity .7s ease, transform .7s ease";
+
+        revealObserver.observe(
+            element
+        );
+
+    }
+);
 
 
+// =========================================================
+// LOGO ANIMATION
+// =========================================================
+
+const logo =
+    document.querySelector(
+        ".logo"
+    );
 
 
-// ===============================
-// DOUBLE CLICK LOGO
-// ===============================
+if (logo) {
 
-const logoElement =
-document.querySelector(".logo");
+    logo.addEventListener(
+        "mouseenter",
+        function () {
 
-if(logoElement){
+            logo.style.transform =
+                "rotate(-7deg) scale(1.08)";
 
-logoElement.addEventListener("dblclick",()=>{
+        }
+    );
 
-    showPage("home");
 
-});
+    logo.addEventListener(
+        "mouseleave",
+        function () {
+
+            logo.style.transform =
+                "rotate(0deg) scale(1)";
+
+        }
+    );
+
+
+    // Double click → Home
+    logo.addEventListener(
+        "dblclick",
+        function () {
+
+            showPage("home");
+
+        }
+    );
 
 }
 
 
+// =========================================================
+// NAVBAR SCROLL EFFECT
+// =========================================================
+
+const header =
+    document.querySelector(
+        "header"
+    );
 
 
+window.addEventListener(
+    "scroll",
+    function () {
+
+        if (!header) {
+            return;
+        }
 
 
-// ===============================
-// CONSOLE MESSAGE
-// ===============================
+        if (
+            window.scrollY > 30
+        ) {
+
+            header.style.boxShadow =
+                "0 8px 25px rgba(0,255,136,.18)";
+
+            header.style.background =
+                "rgba(5,8,5,.96)";
+
+        } else {
+
+            header.style.boxShadow =
+                "none";
+
+            header.style.background =
+                "rgba(5,8,5,.92)";
+
+        }
+
+    }
+);
+
+
+// =========================================================
+// SCROLL PROGRESS BAR
+// =========================================================
+
+const progress =
+    document.createElement(
+        "div"
+    );
+
+
+progress.style.position =
+    "fixed";
+
+progress.style.top =
+    "0";
+
+progress.style.left =
+    "0";
+
+progress.style.height =
+    "3px";
+
+progress.style.width =
+    "0%";
+
+progress.style.background =
+    "#00ff88";
+
+progress.style.zIndex =
+    "99999";
+
+progress.style.pointerEvents =
+    "none";
+
+progress.style.boxShadow =
+    "0 0 10px #00ff88";
+
+
+document.body.appendChild(
+    progress
+);
+
+
+function updateProgress() {
+
+    const documentHeight =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight;
+
+
+    if (documentHeight <= 0) {
+
+        progress.style.width =
+            "0%";
+
+        return;
+    }
+
+
+    const scrollPercent =
+        (
+            window.scrollY /
+            documentHeight
+        ) * 100;
+
+
+    progress.style.width =
+        Math.min(
+            scrollPercent,
+            100
+        ) + "%";
+}
+
+
+window.addEventListener(
+    "scroll",
+    updateProgress
+);
+
+window.addEventListener(
+    "resize",
+    updateProgress
+);
+
+
+// =========================================================
+// PRELOADER / PAGE LOAD
+// =========================================================
+
+window.addEventListener(
+    "load",
+    function () {
+
+        document.body.classList.add(
+            "loaded"
+        );
+
+        // Always start from Home
+        showPage("home");
+
+        updateProgress();
+
+    }
+);
+
+
+// =========================================================
+// PREVENT BROKEN LIVE LINK
+// =========================================================
+
+document.addEventListener(
+    "click",
+    function (event) {
+
+        const liveButton =
+            event.target.closest(
+                "#liveProject"
+            );
+
+        if (!liveButton) {
+            return;
+        }
+
+
+        if (
+            liveButton.href.endsWith("#")
+        ) {
+
+            event.preventDefault();
+
+            alert(
+                "Live project link will be added soon."
+            );
+        }
+
+    }
+);
+
+
+// =========================================================
+// CONSOLE
+// =========================================================
 
 console.log(
-"%cWelcome to Rohit Mishra Portfolio 🚀",
-"color:#00ff88;font-size:18px;font-weight:bold;"
+    "%cWelcome to Rohit Mishra Portfolio 🚀",
+    "color:#00ff88;font-size:18px;font-weight:bold;"
 );
 
 console.log(
-"%cDesigned & Developed by Rohit Mishra",
-"color:white;font-size:14px;"
+    "%cFull Stack Developer • Python • Django • AI",
+    "color:#ffffff;font-size:14px;"
+);
+
+console.log(
+    "%cPortfolio Loaded Successfully ✅",
+    "color:#00ff88;font-size:14px;font-weight:bold;"
 );
 
 
-
-
-
-
-// ===============================
+// =========================================================
 // END
-// ===============================
-
-console.log("Portfolio Loaded Successfully ✅");
+// =========================================================
