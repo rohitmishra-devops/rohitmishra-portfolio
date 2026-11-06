@@ -1,954 +1,1962 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rohit Mishra — Software Developer</title>
+<meta name="description" content="Rohit Mishra is a computer science student and software developer building thoughtful digital products with Python, Django and modern web technologies.">
+<meta name="theme-color" content="#10110f">
 
-    <title>Rohit Mishra | Full Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <meta name="description"
-        content="Rohit Mishra - Full Stack Developer building AI-powered applications and modern web platforms.">
+<style>
+:root {
+    --bg: #10110f;
+    --surface: #171916;
+    --surface2: #1e211c;
+    --text: #eae9df;
+    --muted: #92958a;
+    --accent: #c6a77a;
+    --line: rgba(234,233,223,.12);
+    --mono: "DM Mono", monospace;
+    --sans: "DM Sans", sans-serif;
+    --display: "Manrope", sans-serif;
+}
 
-    <link rel="stylesheet" href="style.css">
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 90px;
+}
 
-    <!-- Remix Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    overflow-x: hidden;
+}
 
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 20;
+    opacity: .12;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.17'/%3E%3C/svg%3E");
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+}
+
+::selection {
+    background: var(--accent);
+    color: #10110f;
+}
+
+.container {
+    width: min(1180px, 90%);
+    margin: auto;
+}
+
+.mono {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.accent {
+    color: var(--accent);
+}
+
+/* NAVIGATION */
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background: rgba(16,17,15,.82);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--line);
+}
+
+nav {
+    width: min(1180px, 90%);
+    height: 76px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: var(--accent);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 33px;
+}
+
+.nav-links a {
+    color: #b9bbb1;
+    font-size: 12px;
+    transition: .3s;
+}
+
+.nav-links a:hover {
+    color: var(--accent);
+}
+
+.nav-contact {
+    border: 1px solid var(--line);
+    padding: 11px 18px;
+    border-radius: 3px;
+}
+
+.menu-btn {
+    display: none;
+    border: 0;
+    background: none;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 100vh;
+    padding-top: 76px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    align-items: center;
+    gap: 30px;
+    min-height: calc(100vh - 76px);
+    padding-top: 50px;
+    padding-bottom: 70px;
+}
+
+.hero-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 34px;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+    background: #9cba83;
+    border-radius: 50%;
+    box-shadow: 0 0 12px #9cba83;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    50% { opacity: .35; }
+}
+
+.hero h1 {
+    font-family: var(--display);
+    font-size: clamp(55px, 7vw, 94px);
+    line-height: .99;
+    letter-spacing: -6px;
+    font-weight: 600;
+}
+
+.hero h1 span {
+    color: var(--accent);
+    font-weight: 400;
+}
+
+.hero-description {
+    max-width: 490px;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.9;
+    margin-top: 32px;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 35px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 15px 21px;
+    font-size: 12px;
+    border: 1px solid var(--line);
+    transition: .3s;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: #141510;
+    border-color: var(--accent);
+}
+
+.btn-primary:hover {
+    background: #e0c39a;
+    transform: translateY(-3px);
+}
+
+.btn-secondary:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-3px);
+}
+
+.hero-meta {
+    display: flex;
+    gap: 40px;
+    margin-top: 75px;
+}
+
+.hero-meta strong {
+    display: block;
+    font-family: var(--display);
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.hero-meta small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+/* 3D SCENE */
+
+.scene-wrap {
+    height: 530px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+#scene {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.scene-caption {
+    position: absolute;
+    bottom: 22px;
+    right: 5px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+}
+
+.scene-index {
+    position: absolute;
+    top: 45px;
+    left: 15px;
+    font-family: var(--mono);
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.floating-note {
+    position: absolute;
+    bottom: 85px;
+    left: 0;
+    padding: 15px 18px;
+    background: rgba(30,33,28,.85);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(12px);
+    z-index: 2;
+}
+
+.floating-note strong {
+    display: block;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.floating-note small {
+    font-size: 10px;
+    color: var(--muted);
+}
+
+/* TICKER */
+
+.ticker {
+    overflow: hidden;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 21px 0;
+}
+
+.ticker-track {
+    display: flex;
+    width: max-content;
+    animation: ticker 32s linear infinite;
+}
+
+.ticker-track span {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--muted);
+    padding: 0 35px;
+}
+
+.ticker-track b {
+    color: var(--accent);
+    margin-left: 30px;
+}
+
+@keyframes ticker {
+    to { transform: translateX(-50%); }
+}
+
+/* GENERAL SECTION */
+
+section {
+    padding: 125px 0;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 65px;
+    gap: 25px;
+}
+
+.section-heading h2 {
+    font-family: var(--display);
+    font-size: clamp(38px, 5vw, 61px);
+    font-weight: 500;
+    letter-spacing: -3px;
+    margin-top: 15px;
+}
+
+.section-heading p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+    max-width: 300px;
+}
+
+/* ABOUT */
+
+.about-grid {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    gap: 100px;
+}
+
+.about-side {
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+}
+
+.about-side .big-number {
+    font-family: var(--display);
+    font-size: 72px;
+    color: var(--accent);
+    letter-spacing: -5px;
+}
+
+.about-side p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.about-content h3 {
+    font-family: var(--display);
+    font-size: clamp(25px, 3vw, 37px);
+    line-height: 1.4;
+    font-weight: 500;
+    letter-spacing: -1px;
+    margin-bottom: 25px;
+}
+
+.about-content p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 2;
+    margin-bottom: 18px;
+}
+
+.about-details {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+}
+
+.detail-item {
+    border-top: 1px solid var(--line);
+    padding-top: 15px;
+}
+
+.detail-item span {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+    margin-bottom: 10px;
+}
+
+.detail-item strong {
+    font-size: 13px;
+    font-weight: 500;
+}
+
+/* CAPABILITIES */
+
+.capabilities {
+    background: var(--surface);
+}
+
+.capability-list {
+    border-top: 1px solid var(--line);
+}
+
+.capability {
+    display: grid;
+    grid-template-columns: 70px 1fr 1fr 35px;
+    align-items: center;
+    padding: 29px 0;
+    border-bottom: 1px solid var(--line);
+    transition: .3s;
+}
+
+.capability:hover {
+    padding-left: 12px;
+}
+
+.capability-number {
+    font-family: var(--mono);
+    color: var(--accent);
+    font-size: 11px;
+}
+
+.capability h3 {
+    font-family: var(--display);
+    font-size: 23px;
+    font-weight: 500;
+}
+
+.capability p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.capability-arrow {
+    color: var(--accent);
+    font-size: 19px;
+}
+
+/* PROJECTS */
+
+.projects-intro {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.projects-intro p {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.project-featured {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    margin-bottom: 22px;
+    overflow: hidden;
+    transition: .4s;
+}
+
+.project-featured:hover {
+    border-color: rgba(198,167,122,.55);
+    transform: translateY(-4px);
+}
+
+.project-visual {
+    min-height: 340px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.visual-hire {
+    background: #252b29;
+}
+
+.visual-bharosa {
+    background: #282b25;
+}
+
+.visual-art {
+    width: 72%;
+    height: 65%;
+    border: 1px solid rgba(234,233,223,.2);
+    background: rgba(16,17,15,.65);
+    padding: 20px;
+    transform: rotate(-5deg);
+    box-shadow: 0 30px 70px rgba(0,0,0,.3);
+    transition: .5s;
+}
+
+.project-featured:hover .visual-art {
+    transform: rotate(0deg) scale(1.04);
+}
+
+.art-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 13px;
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--muted);
+}
+
+.art-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+.art-title {
+    font-family: var(--display);
+    font-size: clamp(20px, 3vw, 32px);
+    margin-top: 25px;
+    letter-spacing: -1px;
+}
+
+.art-lines {
+    margin-top: 18px;
+    display: grid;
+    gap: 9px;
+}
+
+.art-lines i {
+    display: block;
+    height: 5px;
+    background: rgba(234,233,223,.15);
+    width: 90%;
+}
+
+.art-lines i:nth-child(2) { width: 65%; }
+.art-lines i:nth-child(3) { width: 78%; }
+
+.art-footer {
+    margin-top: 25px;
+    display: flex;
+    gap: 10px;
+}
+
+.art-footer span {
+    font-family: var(--mono);
+    font-size: 8px;
+    border: 1px solid var(--line);
+    padding: 7px;
+    color: var(--accent);
+}
+
+.project-info {
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.project-topline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.project-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    color: var(--accent);
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+.project-year {
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 10px;
+}
+
+.project-info h3 {
+    font-family: var(--display);
+    font-size: 39px;
+    font-weight: 500;
+    letter-spacing: -2px;
+    margin: 24px 0 15px;
+}
+
+.project-info p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.9;
+}
+
+.project-tech {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 25px;
+}
+
+.project-tech span {
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 9px;
+    color: #b9bbb1;
+}
+
+.project-links {
+    display: flex;
+    gap: 25px;
+    margin-top: 32px;
+}
+
+.project-links a {
+    font-size: 11px;
+    color: var(--accent);
+    border-bottom: 1px solid rgba(198,167,122,.4);
+    padding-bottom: 5px;
+}
+
+.other-projects {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 55px;
+}
+
+.small-project {
+    padding: 30px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    transition: .3s;
+}
+
+.small-project:hover {
+    border-color: var(--accent);
+    transform: translateY(-5px);
+}
+
+.small-project .project-tag {
+    font-size: 9px;
+}
+
+.small-project h3 {
+    font-family: var(--display);
+    font-size: 25px;
+    font-weight: 500;
+    margin: 23px 0 12px;
+}
+
+.small-project p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.8;
+}
+
+.small-project a {
+    display: inline-block;
+    margin-top: 24px;
+    color: var(--accent);
+    font-size: 11px;
+}
+
+/* JOURNEY */
+
+.journey {
+    background: var(--surface);
+}
+
+.journey-grid {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    gap: 90px;
+}
+
+.journey-intro h3 {
+    font-family: var(--display);
+    font-size: 35px;
+    font-weight: 500;
+    line-height: 1.3;
+    margin-top: 20px;
+}
+
+.journey-intro p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.9;
+    margin-top: 20px;
+}
+
+.timeline {
+    border-top: 1px solid var(--line);
+}
+
+.timeline-item {
+    padding: 25px 0;
+    border-bottom: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 20px;
+}
+
+.timeline-item time {
+    color: var(--accent);
+    font-family: var(--mono);
+    font-size: 10px;
+}
+
+.timeline-item h4 {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.timeline-item p {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.8;
+}
+
+/* CONTACT */
+
+.contact {
+    text-align: center;
+    padding: 145px 0;
+}
+
+.contact h2 {
+    font-family: var(--display);
+    font-size: clamp(45px, 8vw, 90px);
+    letter-spacing: -5px;
+    line-height: 1.05;
+    font-weight: 500;
+    margin-top: 25px;
+}
+
+.contact h2 span {
+    color: var(--accent);
+}
+
+.contact > .container > p {
+    max-width: 480px;
+    margin: 25px auto 35px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 13px;
+    flex-wrap: wrap;
+}
+
+footer {
+    border-top: 1px solid var(--line);
+    padding: 27px 0;
+}
+
+.footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-inner p {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--muted);
+}
+
+.footer-social {
+    display: flex;
+    gap: 22px;
+}
+
+.footer-social a {
+    color: var(--muted);
+    font-size: 11px;
+    transition: .3s;
+}
+
+.footer-social a:hover {
+    color: var(--accent);
+}
+
+/* REVEAL ANIMATIONS */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity .8s ease, transform .8s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 850px) {
+    .hero-grid {
+        grid-template-columns: 1fr;
+        padding-top: 90px;
+    }
+
+    .hero h1 {
+        font-size: clamp(55px, 12vw, 85px);
+    }
+
+    .scene-wrap {
+        height: 400px;
+    }
+
+    .about-grid,
+    .journey-grid {
+        grid-template-columns: 1fr;
+        gap: 45px;
+    }
+
+    .project-featured {
+        grid-template-columns: 1fr;
+    }
+
+    .project-visual {
+        min-height: 300px;
+    }
+
+    .project-info {
+        padding: 35px;
+    }
+
+    .section-heading {
+        align-items: start;
+        flex-direction: column;
+    }
+}
+
+@media(max-width: 600px) {
+    nav {
+        height: 68px;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        width: 100%;
+        padding: 25px 5%;
+        background: #171916;
+        border-bottom: 1px solid var(--line);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 23px;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .hero {
+        padding-top: 68px;
+    }
+
+    .hero-grid {
+        padding-top: 65px;
+        padding-bottom: 40px;
+    }
+
+    .hero h1 {
+        letter-spacing: -4px;
+    }
+
+    .hero-description {
+        font-size: 13px;
+    }
+
+    .hero-meta {
+        gap: 25px;
+        margin-top: 45px;
+    }
+
+    .scene-wrap {
+        height: 320px;
+    }
+
+    section {
+        padding: 85px 0;
+    }
+
+    .section-heading h2 {
+        letter-spacing: -2px;
+    }
+
+    .capability {
+        grid-template-columns: 40px 1fr 25px;
+        gap: 10px;
+    }
+
+    .capability p {
+        display: none;
+    }
+
+    .capability h3 {
+        font-size: 18px;
+    }
+
+    .other-projects {
+        grid-template-columns: 1fr;
+    }
+
+    .project-info {
+        padding: 27px;
+    }
+
+    .project-info h3 {
+        font-size: 32px;
+    }
+
+    .about-details {
+        grid-template-columns: 1fr;
+    }
+
+    .timeline-item {
+        grid-template-columns: 80px 1fr;
+    }
+
+    .contact h2 {
+        letter-spacing: -3px;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media(prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <!-- ================= NAVBAR ================= -->
+<header>
+    <nav>
+        <a href="#home" class="logo">RM<span>.</span></a>
 
-    <header>
+        <button class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
 
-        <div class="logo">
-            RM
+        <div class="nav-links" id="navLinks">
+            <a href="#about">About</a>
+            <a href="#capabilities">Capabilities</a>
+            <a href="#work">Selected Work</a>
+            <a href="#journey">Journey</a>
+            <a href="#contact" class="nav-contact">Let's Talk ↗</a>
         </div>
+    </nav>
+</header>
 
-        <nav>
+<main>
 
-            <button onclick="showPage('home')">
-                Home
-            </button>
+<!-- HERO -->
 
-            <button onclick="showPage('skills')">
-                Skills
-            </button>
+<section class="hero" id="home">
+    <div class="container hero-grid">
 
-            <button onclick="showPage('projects')">
-                Projects
-            </button>
+        <div class="hero-content reveal">
 
-            <button onclick="showPage('contact')">
-                Contact
-            </button>
-
-            <button onclick="showPage('about')">
-                About
-            </button>
-
-        </nav>
-
-    </header>
-
-
-    <!-- ================= HOME ================= -->
-
-    <section class="page active" id="home">
-
-        <div class="hero-left">
-
-            <span class="badge">
-                🚀 Available For Internship
-            </span>
-
-            <h3>
-                Hello, I'm
-            </h3>
+            <div class="hero-label mono">
+                <span class="status-dot"></span>
+                Building digital experiences
+            </div>
 
             <h1>
-                Rohit Mishra
+                Rohit<br>
+                Mishra<span>.</span>
             </h1>
 
-            <h2>
-                Full Stack Developer
-            </h2>
+            <p class="hero-description">
+                I am a computer science student and aspiring software developer
+                interested in building meaningful digital products.
+                I work across Python, backend engineering and modern web technologies,
+                turning ideas into practical software experiences.
+            </p>
+
+            <div class="hero-actions">
+                <a href="#work" class="btn btn-primary">
+                    Explore my work ↗
+                </a>
+
+                <a href="#contact" class="btn btn-secondary">
+                    Get in touch
+                </a>
+            </div>
+
+            <div class="hero-meta">
+                <div>
+                    <strong>04+</strong>
+                    <small>Selected projects</small>
+                </div>
+
+                <div>
+                    <strong>2028</strong>
+                    <small>Expected graduation</small>
+                </div>
+
+                <div>
+                    <strong>01</strong>
+                    <small>Continuous journey</small>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="scene-wrap">
+            <div class="scene-index">FIG. 001 — DIGITAL SPACE</div>
+
+            <canvas id="scene"></canvas>
+
+            <div class="floating-note">
+                <strong>Curiosity → Creation</strong>
+                <small>Ideas are better when built.</small>
+            </div>
+
+            <div class="scene-caption">
+                INTERACTIVE 3D ENVIRONMENT
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- TICKER -->
+
+<div class="ticker">
+    <div class="ticker-track">
+        <span>PYTHON <b>✳</b></span>
+        <span>DJANGO <b>✳</b></span>
+        <span>JAVASCRIPT <b>✳</b></span>
+        <span>REST APIS <b>✳</b></span>
+        <span>DATABASES <b>✳</b></span>
+        <span>SOFTWARE DEVELOPMENT <b>✳</b></span>
+        <span>PYTHON <b>✳</b></span>
+        <span>DJANGO <b>✳</b></span>
+        <span>JAVASCRIPT <b>✳</b></span>
+        <span>REST APIS <b>✳</b></span>
+        <span>DATABASES <b>✳</b></span>
+        <span>SOFTWARE DEVELOPMENT <b>✳</b></span>
+    </div>
+</div>
+
+<!-- ABOUT -->
+
+<section id="about">
+    <div class="container">
+
+        <div class="section-heading reveal">
+            <div>
+                <div class="mono">01 / A little about me</div>
+                <h2>Beyond the code.</h2>
+            </div>
 
             <p>
-
-                Passionate tech student focused on AI/ML and
-                full-stack web development. I enjoy building
-                modern applications and solving real-world
-                problems using Python, Django, JavaScript
-                and MySQL.
-
+                Technology is not just about writing code.
+                It is about understanding problems and building useful solutions.
             </p>
+        </div>
 
-            <div class="hero-buttons">
+        <div class="about-grid">
 
-                <button
-                    class="main-btn"
-                    onclick="showPage('projects')">
-
-                    View Projects
-
-                </button>
-
-                <a href="resume..pdf" download>
-
-                    <button class="outline-btn">
-
-                        Download Resume
-
-                    </button>
-
-                </a>
-
+            <div class="about-side reveal">
+                <div class="big-number">01</div>
+                <p>
+                    A student of computer science, learning by building,
+                    experimenting and improving one project at a time.
+                </p>
             </div>
 
+            <div class="about-content reveal">
 
-            <div class="stats">
+                <h3>
+                    I enjoy the process of turning an idea
+                    into something people can actually use.
+                </h3>
 
-                <div>
+                <p>
+                    My journey started with programming fundamentals and gradually
+                    expanded into web development, backend systems, databases
+                    and API development.
+                </p>
 
-                    <h2>
-                        2+
-                    </h2>
+                <p>
+                    I enjoy working with Python and Django, exploring how
+                    applications work behind the scenes, and creating interfaces
+                    that make technology easier to interact with.
+                </p>
 
-                    <p>
-                        Major Projects
-                    </p>
+                <p>
+                    I believe good software comes from curiosity, consistency
+                    and a willingness to understand the problem before writing
+                    the solution.
+                </p>
+
+                <div class="about-details">
+
+                    <div class="detail-item">
+                        <span>EDUCATION</span>
+                        <strong>Bachelor of Computer Applications</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span>INSTITUTION</span>
+                        <strong>GNIM — GN Group of Institutions</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span>UNIVERSITY</span>
+                        <strong>Chaudhary Charan Singh University</strong>
+                    </div>
+
+                    <div class="detail-item">
+                        <span>FOCUS</span>
+                        <strong>Software & Web Development</strong>
+                    </div>
 
                 </div>
 
+            </div>
+        </div>
 
-                <div>
+    </div>
+</section>
 
-                    <h2>
-                        8+
-                    </h2>
+<!-- CAPABILITIES -->
 
-                    <p>
-                        Skills
-                    </p>
+<section class="capabilities" id="capabilities">
+    <div class="container">
 
-                </div>
+        <div class="section-heading reveal">
+            <div>
+                <div class="mono">02 / What I work with</div>
+                <h2>Capabilities.</h2>
+            </div>
 
+            <p>
+                A growing technical foundation focused on application
+                development, backend systems and problem solving.
+            </p>
+        </div>
 
-                <div>
+        <div class="capability-list">
 
-                    <h2>
-                        100%
-                    </h2>
+            <div class="capability reveal">
+                <span class="capability-number">01</span>
+                <h3>Backend Development</h3>
+                <p>
+                    Python, Django, Django REST Framework,
+                    authentication, APIs and application logic.
+                </p>
+                <span class="capability-arrow">↗</span>
+            </div>
 
-                    <p>
-                        Learning
-                    </p>
+            <div class="capability reveal">
+                <span class="capability-number">02</span>
+                <h3>Frontend Development</h3>
+                <p>
+                    HTML, CSS, JavaScript, DOM manipulation,
+                    responsive layouts and interactive interfaces.
+                </p>
+                <span class="capability-arrow">↗</span>
+            </div>
 
-                </div>
+            <div class="capability reveal">
+                <span class="capability-number">03</span>
+                <h3>Database Engineering</h3>
+                <p>
+                    SQL, MySQL, PostgreSQL, data modelling
+                    and Django ORM.
+                </p>
+                <span class="capability-arrow">↗</span>
+            </div>
 
+            <div class="capability reveal">
+                <span class="capability-number">04</span>
+                <h3>Tools & Workflow</h3>
+                <p>
+                    Git, GitHub, VS Code, API testing
+                    and development workflows.
+                </p>
+                <span class="capability-arrow">↗</span>
+            </div>
+
+            <div class="capability reveal">
+                <span class="capability-number">05</span>
+                <h3>Programming Foundations</h3>
+                <p>
+                    Python, object-oriented programming,
+                    data structures and algorithms.
+                </p>
+                <span class="capability-arrow">↗</span>
             </div>
 
         </div>
+    </div>
+</section>
 
+<!-- WORK -->
 
-        <div class="hero-right">
+<section id="work">
+    <div class="container">
 
-            <div class="profile-3d">
-
-                <div class="glow"></div>
-
-                <img
-                    src="image.png"
-                    alt="Rohit Mishra">
-
+        <div class="section-heading reveal">
+            <div>
+                <div class="mono">03 / Selected projects</div>
+                <h2>Things I've built.</h2>
             </div>
 
+            <p>
+                A collection of projects that reflect my interests
+                in software engineering and practical problem solving.
+            </p>
         </div>
 
-    </section>
-
-
-    <!-- ================= SKILLS ================= -->
-
-    <section class="page" id="skills">
-
-        <h1>
-            My Skills
-        </h1>
-
-        <div class="grid">
-
-
-            <div class="card">
-
-                <i class="ri-html5-fill"></i>
-
-                <h2>
-                    HTML5
-                </h2>
-
-                <p>
-                    Responsive and semantic website development.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <i class="ri-css3-fill"></i>
-
-                <h2>
-                    CSS3
-                </h2>
-
-                <p>
-                    Modern UI, responsive layouts and styling.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <i class="ri-javascript-fill"></i>
-
-                <h2>
-                    JavaScript
-                </h2>
-
-                <p>
-                    Interactive websites using DOM and modern
-                    JavaScript concepts.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <i class="ri-code-box-fill"></i>
-
-                <h2>
-                    Python
-                </h2>
-
-                <p>
-                    Programming, OOP and backend development.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <i class="ri-server-fill"></i>
-
-                <h2>
-                    Django
-                </h2>
-
-                <p>
-                    Backend development, APIs, authentication
-                    and database-driven applications.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <i class="ri-database-2-fill"></i>
-
-                <h2>
-                    MySQL
-                </h2>
-
-                <p>
-                    Database design, CRUD operations and queries.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <i class="ri-github-fill"></i>
-
-                <h2>
-                    Git & GitHub
-                </h2>
-
-                <p>
-                    Version control and collaborative development.
-                </p>
-
-            </div>
-
-
-            <div class="card">
-
-                <i class="ri-robot-2-fill"></i>
-
-                <h2>
-                    AI / ML
-                </h2>
-
-                <p>
-                    Building AI-powered applications and intelligent
-                    software solutions.
-                </p>
-
-            </div>
-
+        <div class="projects-intro">
+            <span class="mono">FEATURED PROJECTS / 02</span>
+            <p>Selected work and experiments</p>
         </div>
 
-    </section>
+        <!-- HIREGENIE -->
 
+        <article class="project-featured reveal">
 
-    <!-- ================= PROJECTS ================= -->
+            <div class="project-visual visual-hire">
 
-    <section class="page" id="projects">
+                <div class="visual-art">
+                    <div class="art-top">
+                        <span>HIREGENIE / DASHBOARD</span>
+                        <span class="art-dot"></span>
+                    </div>
 
-        <h1>
-            Featured Projects
-        </h1>
+                    <div class="art-title">
+                        Find your<br>next opportunity.
+                    </div>
 
-        <p class="section-subtitle">
+                    <div class="art-lines">
+                        <i></i><i></i><i></i>
+                    </div>
 
-            Real-world applications built with modern
-            web technologies, backend systems and AI.
-
-        </p>
-
-
-        <div class="grid">
-
-
-            <!-- ================= AI CAREER ASSISTANT ================= -->
-
-            <div class="card project-card">
-
-                <div class="project-icon">
-
-                    <i class="ri-robot-2-fill"></i>
-
+                    <div class="art-footer">
+                        <span>AI MATCHING</span>
+                        <span>CAREER TOOLS</span>
+                    </div>
                 </div>
 
+            </div>
 
-                <span class="project-tag">
-                    AI • Career Platform
-                </span>
+            <div class="project-info">
 
+                <div class="project-topline">
+                    <span class="project-tag">01 / Featured project</span>
+                    <span class="project-year">2026</span>
+                </div>
 
-                <h2>
-                    AI Career Assistant
-                </h2>
-
+                <h3>HireGenie.</h3>
 
                 <p>
-
-                    AI-powered career platform that helps users
-                    analyze resumes, prepare for interviews and
-                    explore suitable career opportunities.
-
+                    An AI-enabled freelance and career platform designed
+                    to connect opportunities with talent. The project
+                    brings together career-oriented tools, user workflows
+                    and intelligent matching into one application.
                 </p>
-
 
                 <div class="project-tech">
-
-                    <span>
-                        Python
-                    </span>
-
-                    <span>
-                        Django
-                    </span>
-
-                    <span>
-                        AI/ML
-                    </span>
-
-                    <span>
-                        JavaScript
-                    </span>
-
+                    <span>Python</span>
+                    <span>Django</span>
+                    <span>Machine Learning</span>
+                    <span>TF-IDF</span>
+                    <span>JavaScript</span>
                 </div>
 
-
-                <div class="project-actions">
-
-                    <button
-                        class="main-btn"
-                        onclick="openProject('ai')">
-
-                        <i class="ri-eye-fill"></i>
-
-                        View Project
-
-                    </button>
-
-
-                    <a
-                        href="YOUR_AI_GITHUB_LINK"
-                        target="_blank"
-                        class="project-github">
-
-                        <i class="ri-github-fill"></i>
-
+                <div class="project-links">
+                    <a href="https://hiregenie-go83.onrender.com"
+                       target="_blank" rel="noopener">
+                        Live project ↗
                     </a>
 
+                    <a href="https://github.com/rohitmishra-devops/HireGenie"
+                       target="_blank" rel="noopener">
+                        Source code ↗
+                    </a>
+                </div>
+
+            </div>
+        </article>
+
+        <!-- BHAROSA AI -->
+
+        <article class="project-featured reveal">
+
+            <div class="project-visual visual-bharosa">
+
+                <div class="visual-art">
+                    <div class="art-top">
+                        <span>BHAROSA AI / PLATFORM</span>
+                        <span class="art-dot"></span>
+                    </div>
+
+                    <div class="art-title">
+                        Trust in<br>every interaction.
+                    </div>
+
+                    <div class="art-lines">
+                        <i></i><i></i><i></i>
+                    </div>
+
+                    <div class="art-footer">
+                        <span>BHAROSA AI</span>
+                        <span>WEB PLATFORM</span>
+                    </div>
                 </div>
 
             </div>
 
+            <div class="project-info">
 
-            <!-- ================= HIREGENIE ================= -->
-
-            <div class="card project-card">
-
-                <div class="project-icon">
-
-                    <i class="ri-briefcase-4-fill"></i>
-
+                <div class="project-topline">
+                    <span class="project-tag">02 / Featured project</span>
+                    <span class="project-year">2026</span>
                 </div>
 
-
-                <span class="project-tag">
-                    AI • Freelance Marketplace
-                </span>
-
-
-                <h2>
-                    HireGenie
-                </h2>
-
+                <h3>Bharosa AI.</h3>
 
                 <p>
-
-                    AI-integrated freelance marketplace designed
-                    to connect clients and freelancers with intelligent
-                    matching, project management and modern web experiences.
-
+                    An AI-focused web project exploring the intersection
+                    of technology, trust and digital experiences.
+                    Built as part of my journey into developing
+                    practical AI-powered applications.
                 </p>
 
-
                 <div class="project-tech">
-
-                    <span>
-                        Django
-                    </span>
-
-                    <span>
-                        Python
-                    </span>
-
-                    <span>
-                        AI
-                    </span>
-
-                    <span>
-                        JavaScript
-                    </span>
-
+                    <span>AI</span>
+                    <span>Web Development</span>
+                    <span>Python</span>
+                    <span>Application Development</span>
                 </div>
 
-
-                <div class="project-actions">
-
-                    <button
-                        class="main-btn"
-                        onclick="openProject('hiregenie')">
-
-                        <i class="ri-eye-fill"></i>
-
-                        View Project
-
-                    </button>
-
-
-                    <a
-                        href="https://github.com/rohitmishra-devops/HireGenie"
-                        target="_blank"
-                        class="project-github">
-
-                        <i class="ri-github-fill"></i>
-
+                <div class="project-links">
+                    <a href="https://bharosa-ai.onrender.com/"
+                       target="_blank" rel="noopener">
+                        Live project ↗
                     </a>
 
+                    <a href="https://github.com/rohitmishra-devops"
+                       target="_blank" rel="noopener">
+                        GitHub profile ↗
+                    </a>
                 </div>
 
             </div>
+        </article>
+
+        <!-- OTHER PROJECTS -->
+
+        <div class="mono" style="margin-top:65px">
+            MORE EXPLORATIONS / 02
+        </div>
+
+        <div class="other-projects">
+
+            <article class="small-project reveal">
+
+                <span class="project-tag">03 / AI APPLICATION</span>
+
+                <h3>AI Career Assistant.</h3>
+
+                <p>
+                    A career-focused project exploring how intelligent
+                    tools can support users with career-related tasks
+                    and professional development.
+                </p>
+
+                <div class="project-tech">
+                    <span>Python</span>
+                    <span>AI</span>
+                    <span>Web Development</span>
+                </div>
+
+                <a href="https://github.com/rohitmishra-devops"
+                   target="_blank" rel="noopener">
+                    Explore on GitHub ↗
+                </a>
+
+            </article>
+
+            <article class="small-project reveal">
+
+                <span class="project-tag">04 / WEB APPLICATION</span>
+
+                <h3>Image Editor.</h3>
+
+                <p>
+                    A web-based image editing project focused on
+                    visual interaction and exploring image-related
+                    functionality through software.
+                </p>
+
+                <div class="project-tech">
+                    <span>Python</span>
+                    <span>JavaScript</span>
+                    <span>Web Development</span>
+                </div>
+
+                <a href="https://github.com/rohitmishra-devops"
+                   target="_blank" rel="noopener">
+                    Explore on GitHub ↗
+                </a>
+
+            </article>
 
         </div>
 
-    </section>
+    </div>
+</section>
 
+<!-- JOURNEY -->
 
-    <!-- ================= PROJECT MODAL ================= -->
+<section class="journey" id="journey">
+    <div class="container">
 
-    <div
-        id="project-modal"
-        class="project-modal">
+        <div class="section-heading reveal">
+            <div>
+                <div class="mono">04 / The journey</div>
+                <h2>Learning by building.</h2>
+            </div>
+        </div>
 
+        <div class="journey-grid">
 
-        <div class="project-modal-content">
+            <div class="journey-intro reveal">
 
+                <div class="mono">A WORK IN PROGRESS</div>
 
-            <button
-                class="modal-close"
-                onclick="closeProject()">
+                <h3>
+                    Every project is another step forward.
+                </h3>
 
-                <i class="ri-close-line"></i>
-
-            </button>
-
-
-            <div class="modal-icon">
-
-                <i id="modal-icon"></i>
+                <p>
+                    My development journey is driven by curiosity
+                    and practical learning. I focus on strengthening
+                    my fundamentals while building applications
+                    that challenge me to learn something new.
+                </p>
 
             </div>
 
+            <div class="timeline reveal">
 
-            <span
-                id="modal-tag"
-                class="project-tag">
+                <div class="timeline-item">
+                    <time>FOUNDATIONS</time>
+                    <div>
+                        <h4>Programming & Computer Science</h4>
+                        <p>
+                            Building a foundation in programming,
+                            Python, OOP and problem solving.
+                        </p>
+                    </div>
+                </div>
 
-                Project
+                <div class="timeline-item">
+                    <time>WEB</time>
+                    <div>
+                        <h4>Web & Backend Development</h4>
+                        <p>
+                            Exploring frontend development,
+                            Django, databases and REST APIs.
+                        </p>
+                    </div>
+                </div>
 
-            </span>
+                <div class="timeline-item">
+                    <time>PROJECTS</time>
+                    <div>
+                        <h4>Building Real Applications</h4>
+                        <p>
+                            Developing projects such as HireGenie
+                            and Bharosa AI while learning through
+                            practical implementation.
+                        </p>
+                    </div>
+                </div>
 
-
-            <h1 id="modal-title">
-
-                Project Title
-
-            </h1>
-
-
-            <p id="modal-description">
-
-                Project description
-
-            </p>
-
-
-            <div
-                id="modal-tech"
-                class="project-tech">
-
-            </div>
-
-
-            <div class="modal-actions">
-
-
-                <a
-                    id="modal-live"
-                    href="#"
-                    target="_blank"
-                    class="main-btn">
-
-                    <i class="ri-external-link-line"></i>
-
-                    View Live Project
-
-                </a>
-
-
-                <a
-                    id="modal-github"
-                    href="#"
-                    target="_blank"
-                    class="outline-btn">
-
-                    <i class="ri-github-fill"></i>
-
-                    GitHub
-
-                </a>
-
+                <div class="timeline-item">
+                    <time>NEXT</time>
+                    <div>
+                        <h4>Growing as a Software Developer</h4>
+                        <p>
+                            Improving engineering fundamentals,
+                            writing better software and exploring
+                            more challenging projects.
+                        </p>
+                    </div>
+                </div>
 
             </div>
 
         </div>
 
     </div>
+</section>
 
+<!-- CONTACT -->
 
-    <!-- ================= CONTACT ================= -->
+<section class="contact" id="contact">
+    <div class="container reveal">
 
-    <section class="page" id="contact">
+        <div class="mono">05 / Have something in mind?</div>
 
-        <h1>
-            Contact Me
-        </h1>
+        <h2>
+            Let's build<br>
+            something <span>meaningful.</span>
+        </h2>
 
+        <p>
+            Interested in collaborating, discussing ideas,
+            exploring opportunities or building something useful?
+            I'd be happy to connect.
+        </p>
 
-        <div class="box">
+        <div class="contact-links">
 
+            <a href="mailto:rohitmishra13214@gmail.com"
+               class="btn btn-primary">
+                Send an email ↗
+            </a>
 
-            <p>
+            <a href="https://linkedin.com/in/rohit-mishra-8361853b3"
+               target="_blank" rel="noopener"
+               class="btn btn-secondary">
+                LinkedIn ↗
+            </a>
 
-                <i class="ri-mail-fill"></i>
-
-                <a href="mailto:rohitmishra13214@gmail.com">
-
-                    rohitmishra13214@gmail.com
-
-                </a>
-
-            </p>
-
-
-            <br>
-
-
-            <p>
-
-                <i class="ri-phone-fill"></i>
-
-                +91 9354351730
-
-            </p>
-
-
-            <br>
-
-
-            <p>
-
-                <i class="ri-github-fill"></i>
-
-                <a
-                    href="https://github.com/rohitmishra-devops"
-                    target="_blank">
-
-                    github.com/rohitmishra-devops
-
-                </a>
-
-            </p>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= ABOUT ================= -->
-
-    <section class="page" id="about">
-
-        <h1>
-            About Me
-        </h1>
-
-
-        <div class="box">
-
-
-            <p>
-
-                Hello! I'm <b>Rohit Mishra</b>, a BCA student
-                and aspiring Full Stack Developer passionate
-                about building modern web applications and
-                AI-powered products.
-
-            </p>
-
-
-            <br>
-
-
-            <p>
-
-                I work with HTML, CSS, JavaScript, Python,
-                Django, MySQL, Git, GitHub and AI/ML technologies.
-                I enjoy turning ideas into functional,
-                user-friendly applications.
-
-            </p>
-
-
-            <br>
-
-
-            <p>
-
-                Currently, I'm focused on improving my full-stack
-                development skills and building real-world
-                software projects.
-
-            </p>
-
-
-            <br>
-
-
-            <a
-                href="https://github.com/rohitmishra-devops"
-                target="_blank">
-
-                <button class="main-btn">
-
-                    <i class="ri-github-fill"></i>
-
-                    Visit My GitHub
-
-                </button>
-
+            <a href="https://github.com/rohitmishra-devops"
+               target="_blank" rel="noopener"
+               class="btn btn-secondary">
+                GitHub ↗
             </a>
 
         </div>
 
-    </section>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <div class="container footer-inner">
+
+        <p>© <span id="year"></span> ROHIT MISHRA. BUILT WITH INTENTION.</p>
+
+        <div class="footer-social">
+            <a href="https://github.com/rohitmishra-devops"
+               target="_blank" rel="noopener">GITHUB ↗</a>
+
+            <a href="https://linkedin.com/in/rohit-mishra-8361853b3"
+               target="_blank" rel="noopener">LINKEDIN ↗</a>
+
+            <a href="mailto:rohitmishra13214@gmail.com">EMAIL ↗</a>
+        </div>
+
+    </div>
+</footer>
+
+<!-- THREE.JS -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<script>
+
+// YEAR
+
+document.getElementById("year").textContent =
+    new Date().getFullYear();
 
 
-    <!-- ================= FOOTER ================= -->
+// MOBILE MENU
 
-    <footer>
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
 
-        <p>
+menuBtn.addEventListener("click", () => {
+    navLinks.classList.toggle("active");
 
-            © 2026 Rohit Mishra |
-            Designed & Developed by Rohit Mishra
+    menuBtn.textContent =
+        navLinks.classList.contains("active") ? "×" : "☰";
+});
 
-        </p>
-
-    </footer>
-
-
-    <!-- ================= JAVASCRIPT ================= -->
-
-    <script>
-
-        /* ================= PAGE NAVIGATION ================= */
-
-        function showPage(pageId) {
-
-            document
-                .querySelectorAll(".page")
-                .forEach(function (page) {
-
-                    page.classList.remove("active");
-
-                });
+document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+        menuBtn.textContent = "☰";
+    });
+});
 
 
-            const page =
-                document.getElementById(pageId);
+// SCROLL REVEAL
 
+const observer = new IntersectionObserver(entries => {
 
-            if (page) {
+    entries.forEach(entry => {
 
-                page.classList.add("active");
-
-            }
-
-
-            window.scrollTo({
-
-                top: 0,
-                behavior: "smooth"
-
-            });
-
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
         }
 
+    });
 
-        /* ================= PROJECT DATA ================= */
+}, {
+    threshold: 0.12
+});
 
-        const projects = {
+document.querySelectorAll(".reveal").forEach(element => {
+    observer.observe(element);
+});
 
 
-            ai: {
+// 3D ENVIRONMENT
 
-                title: "AI Career Assistant Platform",
+const canvas = document.getElementById("scene");
 
-                tag: "AI • Career Platform",
+if (canvas && window.THREE) {
 
-                icon: "ri-robot-2-fill",
+    const scene = new THREE.Scene();
 
-                description:
-                    "An AI-powered career assistant platform designed to help users improve their career journey. It provides tools for resume analysis, interview preparation, career exploration and personalized career guidance.",
+    scene.background = null;
 
-                tech: [
-                    "Python",
-                    "Django",
-                    "AI/ML",
-                    "JavaScript",
-                    "HTML",
-                    "CSS"
-                ],
+    const camera = new THREE.PerspectiveCamera(
+        45,
+        canvas.clientWidth / canvas.clientHeight,
+        0.1,
+        100
+    );
 
-                live: "YOUR_AI_LIVE_LINK",
+    camera.position.set(0, 0, 9);
 
-                github: "YOUR_AI_GITHUB_LINK"
+    const renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        alpha: true,
+        antialias: true
+    });
 
-            },
+    renderer.setPixelRatio(
+        Math.min(window.devicePixelRatio, 2)
+    );
 
+    renderer.setSize(
+        canvas.clientWidth,
+        canvas.clientHeight
+    );
 
-            hiregenie: {
+    renderer.outputEncoding = THREE.sRGBEncoding;
 
-                title: "HireGenie",
+    // LIGHTING
 
-                tag: "AI • Freelance Marketplace",
+    const ambient = new THREE.AmbientLight(
+        0xffffff,
+        0.7
+    );
 
-                icon: "ri-briefcase-4-fill",
+    scene.add(ambient);
 
-                description:
-                    "HireGenie is an AI-integrated freelance marketplace designed to connect clients and freelancers. The platform focuses on intelligent matching, project management, modern UI and scalable backend architecture.",
+    const mainLight = new THREE.PointLight(
+        0xc6a77a,
+        3,
+        20
+    );
 
-                tech: [
-                    "Django",
-                    "Python",
-                    "AI",
-                    "JavaScript",
-                    "SQLite",
-                    "HTML/CSS"
-                ],
+    mainLight.position.set(3, 3, 5);
+    scene.add(mainLight);
 
-                live: "https://hiregenie-go83.onrender.com",
+    const secondaryLight = new THREE.PointLight(
+        0x718b80,
+        2,
+        15
+    );
 
-                github:
-                    "https://github.com/rohitmishra-devops/HireGenie"
+    secondaryLight.position.set(-4, -2, 2);
+    scene.add(secondaryLight);
 
-            }
 
-        };
+    // MAIN SCULPTURE
 
+    const sculpture = new THREE.Group();
 
-        /* ================= OPEN PROJECT ================= */
+    scene.add(sculpture);
 
-        function openProject(projectName) {
+    const material = new THREE.MeshStandardMaterial({
+        color: 0xc6a77a,
+        metalness: 0.82,
+        roughness: 0.23
+    });
 
-            const project =
-                projects[projectName];
+    const innerMaterial = new THREE.MeshStandardMaterial({
+        color: 0x65766b,
+        metalness: 0.75,
+        roughness: 0.3
+    });
 
+    // LARGE RINGS
 
-            if (!project) return;
+    for (let i = 0; i < 4; i++) {
 
-
-            document
-                .getElementById("modal-title")
-                .textContent = project.title;
-
-
-            document
-                .getElementById("modal-tag")
-                .textContent = project.tag;
-
-
-            document
-                .getElementById("modal-description")
-                .textContent = project.description;
-
-
-            const icon =
-                document.getElementById("modal-icon");
-
-
-            icon.className =
-                project.icon;
-
-
-            const techContainer =
-                document.getElementById("modal-tech");
-
-
-            techContainer.innerHTML = "";
-
-
-            project.tech.forEach(function (tech) {
-
-                const span =
-                    document.createElement("span");
-
-
-                span.textContent =
-                    tech;
-
-
-                techContainer.appendChild(span);
-
-            });
-
-
-            document
-                .getElementById("modal-live")
-                .href = project.live;
-
-
-            document
-                .getElementById("modal-github")
-                .href = project.github;
-
-
-            document
-                .getElementById("project-modal")
-                .classList.add("show");
-
-
-            document.body.classList.add("modal-open");
-
-        }
-
-
-        /* ================= CLOSE PROJECT ================= */
-
-        function closeProject() {
-
-            document
-                .getElementById("project-modal")
-                .classList.remove("show");
-
-
-            document.body.classList.remove("modal-open");
-
-        }
-
-
-        /* ================= OUTSIDE CLICK ================= */
-
-        document
-            .getElementById("project-modal")
-            .addEventListener("click", function (event) {
-
-                if (event.target === this) {
-
-                    closeProject();
-
-                }
-
-            });
-
-
-        /* ================= ESC KEY ================= */
-
-        document.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (event.key === "Escape") {
-
-                    closeProject();
-
-                }
-
-            }
+        const geometry = new THREE.TorusGeometry(
+            2.1 - i * 0.27,
+            0.025,
+            16,
+            120
         );
 
-    </script>
+        const ring = new THREE.Mesh(
+            geometry,
+            i % 2 === 0 ? material : innerMaterial
+        );
+
+        ring.rotation.x = Math.PI / 2.5 + i * 0.35;
+        ring.rotation.y = i * 0.65;
+
+        sculpture.add(ring);
+
+    }
+
+
+    // CENTRAL OBJECT
+
+    const coreGeometry = new THREE.IcosahedronGeometry(
+        0.72,
+        2
+    );
+
+    const coreMaterial = new THREE.MeshStandardMaterial({
+        color: 0xc6a77a,
+        metalness: 0.8,
+        roughness: 0.2,
+        flatShading: true
+    });
+
+    const core = new THREE.Mesh(
+        coreGeometry,
+        coreMaterial
+    );
+
+    sculpture.add(core);
+
+
+    // SMALL FLOATING OBJECTS
+
+    const particles = new THREE.Group();
+
+    scene.add(particles);
+
+    const particleGeometry = new THREE.SphereGeometry(
+        0.035,
+        10,
+        10
+    );
+
+    const particleMaterial = new THREE.MeshStandardMaterial({
+        color: 0xc6a77a,
+        emissive: 0x3b2812
+    });
+
+    for (let i = 0; i < 65; i++) {
+
+        const particle = new THREE.Mesh(
+            particleGeometry,
+            particleMaterial
+        );
+
+        particle.position.set(
+            (Math.random() - 0.5) * 8,
+            (Math.random() - 0.5) * 7,
+            (Math.random() - 0.5) * 4
+        );
+
+        particles.add(particle);
+
+    }
+
+
+    // GRID FLOOR
+
+    const grid = new THREE.GridHelper(
+        12,
+        30,
+        0x6b5940,
+        0x34372f
+    );
+
+    grid.position.y = -2.5;
+    grid.position.z = -1;
+
+    grid.material.transparent = true;
+    grid.material.opacity = 0.22;
+
+    scene.add(grid);
+
+
+    // MOUSE INTERACTION
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+    window.addEventListener("mousemove", event => {
+
+        mouseX = (
+            event.clientX / window.innerWidth - 0.5
+        );
+
+        mouseY = (
+            event.clientY / window.innerHeight - 0.5
+        );
+
+    });
+
+
+    // RESIZE
+
+    function resizeScene() {
+
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+
+        if (!width || !height) return;
+
+        camera.aspect = width / height;
+
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(width, height);
+
+    }
+
+    window.addEventListener("resize", resizeScene);
+
+
+    // ANIMATION LOOP
+
+    const clock = new THREE.Clock();
+
+    function animate() {
+
+        requestAnimationFrame(animate);
+
+        const elapsed = clock.getElapsedTime();
+
+        sculpture.rotation.y =
+            elapsed * 0.15 + mouseX * 0.3;
+
+        sculpture.rotation.x =
+            Math.sin(elapsed * 0.35) * 0.15
+            + mouseY * 0.2;
+
+        core.rotation.x = elapsed * 0.25;
+        core.rotation.y = elapsed * 0.35;
+
+        particles.rotation.y = elapsed * 0.025;
+
+        sculpture.position.y =
+            Math.sin(elapsed * 0.7) * 0.13;
+
+        renderer.render(scene, camera);
+
+    }
+
+    animate();
+
+}
+
+</script>
 
 </body>
-
 </html>
