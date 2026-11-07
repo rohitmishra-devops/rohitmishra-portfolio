@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Rohit Mishra — Software Developer</title>
-<meta name="description" content="Rohit Mishra is a computer science student and software developer building thoughtful digital products with Python, Django and modern web technologies.">
-<meta name="theme-color" content="#10110f">
+<title>Rohit Mishra | Developer Portfolio</title>
+<meta name="description" content="Rohit Mishra — Computer Science Student and Developer. Explore my projects, skills and development journey.">
+<meta name="theme-color" content="#171812">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,1006 +14,873 @@
 
 <style>
 :root {
-    --bg: #10110f;
-    --surface: #171916;
-    --surface2: #1e211c;
-    --text: #eae9df;
-    --muted: #92958a;
-    --accent: #c6a77a;
-    --line: rgba(234,233,223,.12);
-    --mono: "DM Mono", monospace;
-    --sans: "DM Sans", sans-serif;
-    --display: "Manrope", sans-serif;
+    --bg:#171812;
+    --bg2:#202219;
+    --cream:#eee9dc;
+    --muted:#aaa99b;
+    --olive:#a5ad8c;
+    --copper:#c28e69;
+    --line:rgba(238,233,220,.15);
+    --mono:"DM Mono",monospace;
+    --sans:"DM Sans",sans-serif;
+    --head:"Manrope",sans-serif;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 90px;
+    scroll-behavior:smooth;
+    scroll-padding-top:90px;
 }
 
 body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: var(--sans);
-    overflow-x: hidden;
-}
-
-body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 20;
-    opacity: .12;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.17'/%3E%3C/svg%3E");
+    background:var(--bg);
+    color:var(--cream);
+    font-family:var(--sans);
+    overflow-x:hidden;
 }
 
 a {
-    color: inherit;
-    text-decoration: none;
+    text-decoration:none;
+    color:inherit;
 }
 
-button {
-    font: inherit;
-}
+button {font:inherit}
 
 ::selection {
-    background: var(--accent);
-    color: #10110f;
+    background:var(--copper);
+    color:#171812;
 }
 
-.container {
-    width: min(1180px, 90%);
-    margin: auto;
+/* LOADER */
+
+.loader {
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    background:#171812;
+    display:grid;
+    place-items:center;
+    transition:opacity .8s,visibility .8s;
 }
 
-.mono {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--muted);
+.loader.hide {
+    opacity:0;
+    visibility:hidden;
 }
 
-.accent {
-    color: var(--accent);
+.loader-content {
+    text-align:center;
+}
+
+.loader-title {
+    font:800 23px var(--head);
+    letter-spacing:5px;
+}
+
+.loader-bar {
+    width:190px;
+    height:2px;
+    background:#393b30;
+    margin:20px auto;
+}
+
+.loader-bar span {
+    display:block;
+    height:100%;
+    width:0;
+    background:var(--copper);
+    animation:loading 1.5s ease forwards;
+}
+
+.loader small {
+    font:9px var(--mono);
+    letter-spacing:3px;
+    color:var(--muted);
+}
+
+@keyframes loading {
+    to {width:100%}
+}
+
+/* 3D WORLD */
+
+#world {
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+}
+
+#world canvas {
+    width:100%;
+    height:100%;
+    display:block;
+}
+
+.world-overlay {
+    position:fixed;
+    inset:0;
+    z-index:1;
+    pointer-events:none;
+    background:
+      linear-gradient(90deg,rgba(23,24,18,.72),transparent 70%),
+      radial-gradient(ellipse at center,transparent 30%,rgba(10,11,8,.4));
+}
+
+.grain {
+    position:fixed;
+    inset:0;
+    z-index:2;
+    pointer-events:none;
+    opacity:.09;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
 }
 
 /* NAVIGATION */
 
-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 100;
-    background: rgba(16,17,15,.82);
-    backdrop-filter: blur(18px);
-    border-bottom: 1px solid var(--line);
-}
-
-nav {
-    width: min(1180px, 90%);
-    height: 76px;
-    margin: auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.nav {
+    position:fixed;
+    z-index:100;
+    top:0;
+    left:0;
+    width:100%;
+    height:78px;
+    padding:0 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:rgba(23,24,18,.65);
+    backdrop-filter:blur(16px);
+    border-bottom:1px solid rgba(255,255,255,.04);
 }
 
 .logo {
-    font-family: var(--display);
-    font-weight: 800;
-    font-size: 20px;
-    letter-spacing: -1px;
+    font:800 23px var(--head);
+    letter-spacing:-1px;
 }
 
-.logo span {
-    color: var(--accent);
-}
+.logo span {color:var(--copper)}
 
 .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 33px;
+    display:flex;
+    gap:30px;
+    list-style:none;
 }
 
 .nav-links a {
-    color: #b9bbb1;
-    font-size: 12px;
-    transition: .3s;
+    font-size:11px;
+    color:#d0cdbf;
+    transition:.3s;
 }
 
-.nav-links a:hover {
-    color: var(--accent);
+.nav-links a:hover {color:var(--copper)}
+
+.nav-button {
+    padding:11px 17px;
+    border:1px solid var(--line);
 }
 
-.nav-contact {
-    border: 1px solid var(--line);
-    padding: 11px 18px;
-    border-radius: 3px;
+.progress {
+    position:fixed;
+    z-index:200;
+    top:0;
+    left:0;
+    height:2px;
+    width:0;
+    background:var(--copper);
 }
 
-.menu-btn {
-    display: none;
-    border: 0;
-    background: none;
-    color: white;
-    font-size: 25px;
-    cursor: pointer;
+/* COMMON */
+
+main {
+    position:relative;
+    z-index:5;
+}
+
+section {
+    position:relative;
+    min-height:100vh;
+    padding:125px 8%;
+    display:flex;
+    align-items:center;
+    border-bottom:1px solid rgba(255,255,255,.045);
+}
+
+.container {
+    width:min(1120px,100%);
+    margin:auto;
+}
+
+.eyebrow {
+    color:var(--copper);
+    font:10px var(--mono);
+    letter-spacing:2.5px;
+    margin-bottom:24px;
+}
+
+.heading {
+    font:600 clamp(43px,7vw,82px)/1.05 var(--head);
+    letter-spacing:-4px;
+}
+
+.heading span {color:var(--olive)}
+
+.description {
+    color:var(--muted);
+    font-size:14px;
+    line-height:2;
+    max-width:570px;
+    margin-top:22px;
+}
+
+.reveal {
+    opacity:0;
+    transform:translateY(35px);
+    transition:opacity .9s ease,transform .9s ease;
+}
+
+.reveal.visible {
+    opacity:1;
+    transform:translateY(0);
 }
 
 /* HERO */
 
 .hero {
-    min-height: 100vh;
-    padding-top: 76px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
+    min-height:100vh;
+    padding-top:140px;
+    overflow:hidden;
 }
 
 .hero-grid {
-    display: grid;
-    grid-template-columns: 1.05fr .95fr;
-    align-items: center;
-    gap: 30px;
-    min-height: calc(100vh - 76px);
-    padding-top: 50px;
-    padding-bottom: 70px;
-}
-
-.hero-label {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 34px;
-}
-
-.status-dot {
-    width: 7px;
-    height: 7px;
-    background: #9cba83;
-    border-radius: 50%;
-    box-shadow: 0 0 12px #9cba83;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    50% { opacity: .35; }
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    align-items:center;
+    gap:35px;
 }
 
 .hero h1 {
-    font-family: var(--display);
-    font-size: clamp(55px, 7vw, 94px);
-    line-height: .99;
-    letter-spacing: -6px;
-    font-weight: 600;
+    font:600 clamp(62px,9vw,115px)/.96 var(--head);
+    letter-spacing:-7px;
 }
 
 .hero h1 span {
-    color: var(--accent);
-    font-weight: 400;
+    color:var(--olive);
 }
 
 .hero-description {
-    max-width: 490px;
-    color: var(--muted);
-    font-size: 15px;
-    line-height: 1.9;
-    margin-top: 32px;
+    max-width:470px;
+    color:#c0beaf;
+    font-size:14px;
+    line-height:2;
+    margin-top:27px;
 }
 
-.hero-actions {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-top: 35px;
-    flex-wrap: wrap;
+.actions {
+    display:flex;
+    gap:13px;
+    flex-wrap:wrap;
+    margin-top:30px;
 }
 
 .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 15px 21px;
-    font-size: 12px;
-    border: 1px solid var(--line);
-    transition: .3s;
+    padding:14px 20px;
+    font-size:11px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    transition:.3s;
 }
 
 .btn-primary {
-    background: var(--accent);
-    color: #141510;
-    border-color: var(--accent);
+    background:var(--cream);
+    color:#191a14;
 }
 
 .btn-primary:hover {
-    background: #e0c39a;
-    transform: translateY(-3px);
+    background:var(--copper);
+    transform:translateY(-4px);
 }
 
-.btn-secondary:hover {
-    border-color: var(--accent);
-    color: var(--accent);
-    transform: translateY(-3px);
+.btn-outline {
+    border:1px solid var(--line);
 }
 
-.hero-meta {
-    display: flex;
-    gap: 40px;
-    margin-top: 75px;
+.btn-outline:hover {
+    border-color:var(--copper);
+    color:var(--copper);
 }
 
-.hero-meta strong {
-    display: block;
-    font-family: var(--display);
-    font-size: 24px;
-    font-weight: 500;
+.identity {
+    display:flex;
+    align-items:center;
+    gap:13px;
+    margin-top:37px;
 }
 
-.hero-meta small {
-    color: var(--muted);
-    font-size: 11px;
+.identity img {
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    object-fit:cover;
+    border:1px solid var(--copper);
 }
 
-/* 3D SCENE */
-
-.scene-wrap {
-    height: 530px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    perspective: 1000px;
+.identity strong {
+    display:block;
+    font-size:12px;
 }
 
-#scene {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+.identity small {
+    font:9px var(--mono);
+    color:var(--muted);
 }
 
-.scene-caption {
-    position: absolute;
-    bottom: 22px;
-    right: 5px;
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 1px;
+/* CODE EDITOR */
+
+.editor-scene {
+    position:relative;
+    perspective:1200px;
+    transform-style:preserve-3d;
 }
 
-.scene-index {
-    position: absolute;
-    top: 45px;
-    left: 15px;
-    font-family: var(--mono);
-    color: var(--muted);
-    font-size: 10px;
+.editor {
+    width:100%;
+    max-width:470px;
+    margin:auto;
+    border:1px solid rgba(238,233,220,.2);
+    border-radius:12px;
+    background:rgba(25,27,21,.88);
+    backdrop-filter:blur(18px);
+    box-shadow:
+        0 35px 90px rgba(0,0,0,.45),
+        0 0 50px rgba(194,142,105,.08);
+    overflow:hidden;
+    transform:rotateY(-9deg) rotateX(4deg);
+    animation:editorFloat 6s ease-in-out infinite;
 }
 
-.floating-note {
-    position: absolute;
-    bottom: 85px;
-    left: 0;
-    padding: 15px 18px;
-    background: rgba(30,33,28,.85);
-    border: 1px solid var(--line);
-    backdrop-filter: blur(12px);
-    z-index: 2;
+@keyframes editorFloat {
+    0%,100% {transform:rotateY(-9deg) rotateX(4deg) translateY(0)}
+    50% {transform:rotateY(-5deg) rotateX(2deg) translateY(-13px)}
 }
 
-.floating-note strong {
-    display: block;
-    font-size: 12px;
-    margin-bottom: 5px;
+.editor-top {
+    height:43px;
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding:0 15px;
+    border-bottom:1px solid var(--line);
+    background:rgba(255,255,255,.025);
 }
 
-.floating-note small {
-    font-size: 10px;
-    color: var(--muted);
+.dot {
+    width:8px;
+    height:8px;
+    border-radius:50%;
 }
 
-/* TICKER */
+.dot:nth-child(1){background:#c17e68}
+.dot:nth-child(2){background:#c3a66e}
+.dot:nth-child(3){background:#899b75}
 
-.ticker {
-    overflow: hidden;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    padding: 21px 0;
+.editor-name {
+    margin-left:12px;
+    font:9px var(--mono);
+    color:#aaa99b;
 }
 
-.ticker-track {
-    display: flex;
-    width: max-content;
-    animation: ticker 32s linear infinite;
+.editor-body {
+    display:grid;
+    grid-template-columns:32px 1fr;
+    padding:22px 12px;
+    min-height:245px;
 }
 
-.ticker-track span {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: var(--muted);
-    padding: 0 35px;
+.line-numbers {
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    color:#66695b;
+    font:10px/1.5 var(--mono);
+    text-align:right;
+    padding-right:12px;
 }
 
-.ticker-track b {
-    color: var(--accent);
-    margin-left: 30px;
+.code {
+    color:#d7d4c7;
+    font:10px/1.5 var(--mono);
+    white-space:pre-wrap;
+    overflow-wrap:anywhere;
 }
 
-@keyframes ticker {
-    to { transform: translateX(-50%); }
+.code .keyword {color:#c99a77}
+.code .function {color:#b2b990}
+.code .string {color:#d1b77c}
+.code .comment {color:#777d6b}
+.code .name {color:#d8d5c8}
+
+.cursor {
+    display:inline-block;
+    height:12px;
+    width:6px;
+    background:var(--copper);
+    vertical-align:middle;
+    animation:blink .8s infinite;
 }
 
-/* GENERAL SECTION */
-
-section {
-    padding: 125px 0;
+@keyframes blink {
+    50%{opacity:0}
 }
 
-.section-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    margin-bottom: 65px;
-    gap: 25px;
+.terminal {
+    border-top:1px solid var(--line);
+    padding:14px 18px;
+    font:9px/2 var(--mono);
+    color:#a6b18e;
 }
 
-.section-heading h2 {
-    font-family: var(--display);
-    font-size: clamp(38px, 5vw, 61px);
-    font-weight: 500;
-    letter-spacing: -3px;
-    margin-top: 15px;
+.terminal span {color:var(--copper)}
+
+.editor-label {
+    text-align:center;
+    color:var(--muted);
+    font:9px var(--mono);
+    letter-spacing:2px;
+    margin-top:23px;
 }
 
-.section-heading p {
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.8;
-    max-width: 300px;
+.scroll-indicator {
+    position:absolute;
+    bottom:30px;
+    left:8%;
+    font:9px var(--mono);
+    letter-spacing:2px;
+    color:#aaa99b;
+}
+
+.scroll-indicator span {
+    color:var(--copper);
+    display:inline-block;
+    margin-left:12px;
+    animation:down 1.5s infinite;
+}
+
+@keyframes down {
+    50%{transform:translateY(7px)}
 }
 
 /* ABOUT */
 
+.about {
+    background:linear-gradient(90deg,rgba(23,24,18,.88),rgba(23,24,18,.55));
+}
+
 .about-grid {
-    display: grid;
-    grid-template-columns: .8fr 1.2fr;
-    gap: 100px;
+    display:grid;
+    grid-template-columns:.8fr 1.2fr;
+    gap:75px;
+    align-items:center;
 }
 
-.about-side {
-    border-top: 1px solid var(--line);
-    padding-top: 20px;
+.about-statement {
+    font:600 29px/1.5 var(--head);
 }
 
-.about-side .big-number {
-    font-family: var(--display);
-    font-size: 72px;
-    color: var(--accent);
-    letter-spacing: -5px;
+.about-statement span {color:var(--copper)}
+
+.about-copy p {
+    color:#bcbbae;
+    font-size:13px;
+    line-height:2.1;
+    margin-bottom:17px;
 }
 
-.about-side p {
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.8;
+.facts {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:25px;
 }
 
-.about-content h3 {
-    font-family: var(--display);
-    font-size: clamp(25px, 3vw, 37px);
-    line-height: 1.4;
-    font-weight: 500;
-    letter-spacing: -1px;
-    margin-bottom: 25px;
+.fact {
+    padding:17px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.035);
 }
 
-.about-content p {
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 2;
-    margin-bottom: 18px;
+.fact small {
+    display:block;
+    color:var(--copper);
+    font:9px var(--mono);
+    margin-bottom:9px;
 }
 
-.about-details {
-    margin-top: 40px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 25px;
+.fact strong {font-size:12px}
+
+/* SKILLS */
+
+.skills {
+    background:rgba(24,26,19,.65);
 }
 
-.detail-item {
-    border-top: 1px solid var(--line);
-    padding-top: 15px;
+.skills-grid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+    margin-top:48px;
 }
 
-.detail-item span {
-    display: block;
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-    margin-bottom: 10px;
+.skill {
+    padding:25px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.035);
+    backdrop-filter:blur(10px);
+    transition:.35s;
 }
 
-.detail-item strong {
-    font-size: 13px;
-    font-weight: 500;
+.skill:hover {
+    transform:translateY(-8px);
+    border-color:var(--copper);
+    background:rgba(194,142,105,.08);
 }
 
-/* CAPABILITIES */
-
-.capabilities {
-    background: var(--surface);
+.skill small {
+    font:9px var(--mono);
+    color:var(--copper);
 }
 
-.capability-list {
-    border-top: 1px solid var(--line);
+.skill h3 {
+    font:600 20px var(--head);
+    margin:17px 0;
 }
 
-.capability {
-    display: grid;
-    grid-template-columns: 70px 1fr 1fr 35px;
-    align-items: center;
-    padding: 29px 0;
-    border-bottom: 1px solid var(--line);
-    transition: .3s;
+.tags {
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
 }
 
-.capability:hover {
-    padding-left: 12px;
-}
-
-.capability-number {
-    font-family: var(--mono);
-    color: var(--accent);
-    font-size: 11px;
-}
-
-.capability h3 {
-    font-family: var(--display);
-    font-size: 23px;
-    font-weight: 500;
-}
-
-.capability p {
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.8;
-}
-
-.capability-arrow {
-    color: var(--accent);
-    font-size: 19px;
+.tags span {
+    padding:7px 9px;
+    font-size:10px;
+    color:#d0cebf;
+    background:rgba(255,255,255,.07);
 }
 
 /* PROJECTS */
 
-.projects-intro {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
+.projects {
+    background:rgba(22,24,18,.83);
 }
 
-.projects-intro p {
-    color: var(--muted);
-    font-size: 12px;
+.project-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+    margin-top:45px;
 }
 
-.project-featured {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    margin-bottom: 22px;
-    overflow: hidden;
-    transition: .4s;
+.project {
+    border:1px solid var(--line);
+    background:rgba(30,32,24,.82);
+    backdrop-filter:blur(12px);
+    overflow:hidden;
+    transition:.4s;
 }
 
-.project-featured:hover {
-    border-color: rgba(198,167,122,.55);
-    transform: translateY(-4px);
+.project:hover {
+    transform:translateY(-8px);
+    border-color:var(--copper);
+    box-shadow:0 25px 65px rgba(0,0,0,.3);
 }
 
 .project-visual {
-    min-height: 340px;
-    position: relative;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height:195px;
+    position:relative;
+    display:grid;
+    place-items:center;
+    overflow:hidden;
+    background:
+      radial-gradient(circle at 50% 50%,rgba(165,173,140,.22),transparent 65%),
+      linear-gradient(135deg,#34382a,#1b1e17);
 }
 
-.visual-hire {
-    background: #252b29;
+.project-visual::before,
+.project-visual::after {
+    content:"";
+    position:absolute;
+    width:125px;
+    height:125px;
+    border:1px solid rgba(194,142,105,.45);
+    transform:rotate(45deg);
+    transition:.6s;
 }
 
-.visual-bharosa {
-    background: #282b25;
+.project-visual::after {
+    width:90px;
+    height:90px;
+    border-color:rgba(165,173,140,.6);
+    transform:rotate(-25deg);
 }
 
-.visual-art {
-    width: 72%;
-    height: 65%;
-    border: 1px solid rgba(234,233,223,.2);
-    background: rgba(16,17,15,.65);
-    padding: 20px;
-    transform: rotate(-5deg);
-    box-shadow: 0 30px 70px rgba(0,0,0,.3);
-    transition: .5s;
+.project:hover .project-visual::before {
+    transform:rotate(100deg) scale(1.4);
 }
 
-.project-featured:hover .visual-art {
-    transform: rotate(0deg) scale(1.04);
+.project:hover .project-visual::after {
+    transform:rotate(60deg) scale(1.4);
 }
 
-.art-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 13px;
-    font-family: var(--mono);
-    font-size: 9px;
-    color: var(--muted);
+.project-symbol {
+    position:relative;
+    z-index:2;
+    font:700 28px var(--head);
 }
 
-.art-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--accent);
+.project-symbol span {color:var(--copper)}
+
+.project-content {padding:25px}
+
+.project-meta {
+    font:9px var(--mono);
+    letter-spacing:1.5px;
+    color:var(--copper);
 }
 
-.art-title {
-    font-family: var(--display);
-    font-size: clamp(20px, 3vw, 32px);
-    margin-top: 25px;
-    letter-spacing: -1px;
+.project h3 {
+    font:600 23px var(--head);
+    margin:13px 0;
 }
 
-.art-lines {
-    margin-top: 18px;
-    display: grid;
-    gap: 9px;
-}
-
-.art-lines i {
-    display: block;
-    height: 5px;
-    background: rgba(234,233,223,.15);
-    width: 90%;
-}
-
-.art-lines i:nth-child(2) { width: 65%; }
-.art-lines i:nth-child(3) { width: 78%; }
-
-.art-footer {
-    margin-top: 25px;
-    display: flex;
-    gap: 10px;
-}
-
-.art-footer span {
-    font-family: var(--mono);
-    font-size: 8px;
-    border: 1px solid var(--line);
-    padding: 7px;
-    color: var(--accent);
-}
-
-.project-info {
-    padding: 48px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.project-topline {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.project-tag {
-    font-family: var(--mono);
-    font-size: 9px;
-    color: var(--accent);
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-}
-
-.project-year {
-    color: var(--muted);
-    font-family: var(--mono);
-    font-size: 10px;
-}
-
-.project-info h3 {
-    font-family: var(--display);
-    font-size: 39px;
-    font-weight: 500;
-    letter-spacing: -2px;
-    margin: 24px 0 15px;
-}
-
-.project-info p {
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.9;
-}
-
-.project-tech {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-top: 25px;
-}
-
-.project-tech span {
-    padding: 8px 10px;
-    border: 1px solid var(--line);
-    font-family: var(--mono);
-    font-size: 9px;
-    color: #b9bbb1;
+.project p {
+    color:#b1b1a4;
+    font-size:12px;
+    line-height:1.9;
+    min-height:70px;
 }
 
 .project-links {
-    display: flex;
-    gap: 25px;
-    margin-top: 32px;
+    display:flex;
+    gap:20px;
+    margin-top:20px;
 }
 
 .project-links a {
-    font-size: 11px;
-    color: var(--accent);
-    border-bottom: 1px solid rgba(198,167,122,.4);
-    padding-bottom: 5px;
+    font-size:11px;
+    border-bottom:1px solid var(--copper);
+    padding-bottom:5px;
 }
 
-.other-projects {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-top: 55px;
+.project-links a:hover {color:var(--copper)}
+
+.project-note {
+    color:#969889;
+    font-size:11px;
+    margin-top:25px;
 }
 
-.small-project {
-    padding: 30px;
-    border: 1px solid var(--line);
-    background: var(--surface);
-    transition: .3s;
-}
+/* EDUCATION */
 
-.small-project:hover {
-    border-color: var(--accent);
-    transform: translateY(-5px);
-}
-
-.small-project .project-tag {
-    font-size: 9px;
-}
-
-.small-project h3 {
-    font-family: var(--display);
-    font-size: 25px;
-    font-weight: 500;
-    margin: 23px 0 12px;
-}
-
-.small-project p {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.8;
-}
-
-.small-project a {
-    display: inline-block;
-    margin-top: 24px;
-    color: var(--accent);
-    font-size: 11px;
-}
-
-/* JOURNEY */
-
-.journey {
-    background: var(--surface);
-}
-
-.journey-grid {
-    display: grid;
-    grid-template-columns: .8fr 1.2fr;
-    gap: 90px;
-}
-
-.journey-intro h3 {
-    font-family: var(--display);
-    font-size: 35px;
-    font-weight: 500;
-    line-height: 1.3;
-    margin-top: 20px;
-}
-
-.journey-intro p {
-    color: var(--muted);
-    font-size: 13px;
-    line-height: 1.9;
-    margin-top: 20px;
+.education {
+    background:rgba(23,24,18,.78);
 }
 
 .timeline {
-    border-top: 1px solid var(--line);
+    border-left:1px solid var(--copper);
+    margin-top:45px;
+    max-width:700px;
 }
 
 .timeline-item {
-    padding: 25px 0;
-    border-bottom: 1px solid var(--line);
-    display: grid;
-    grid-template-columns: 110px 1fr;
-    gap: 20px;
+    position:relative;
+    padding:0 0 45px 32px;
 }
 
-.timeline-item time {
-    color: var(--accent);
-    font-family: var(--mono);
-    font-size: 10px;
+.timeline-item::before {
+    content:"";
+    position:absolute;
+    left:-5px;
+    top:4px;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:var(--copper);
+    box-shadow:0 0 20px var(--copper);
 }
 
-.timeline-item h4 {
-    font-size: 15px;
-    font-weight: 500;
-    margin-bottom: 8px;
+.timeline-item small {
+    font:10px var(--mono);
+    color:var(--copper);
+}
+
+.timeline-item h3 {
+    font:600 23px var(--head);
+    margin:12px 0;
 }
 
 .timeline-item p {
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.8;
+    color:#aaa99b;
+    font-size:12px;
+    line-height:2;
 }
 
 /* CONTACT */
 
 .contact {
-    text-align: center;
-    padding: 145px 0;
+    min-height:90vh;
+    text-align:center;
+    background:
+      radial-gradient(ellipse at center,rgba(165,173,140,.12),transparent 60%),
+      rgba(23,24,18,.9);
 }
+
+.contact .container {text-align:center}
 
 .contact h2 {
-    font-family: var(--display);
-    font-size: clamp(45px, 8vw, 90px);
-    letter-spacing: -5px;
-    line-height: 1.05;
-    font-weight: 500;
-    margin-top: 25px;
+    font:600 clamp(52px,9vw,100px)/1.05 var(--head);
+    letter-spacing:-5px;
 }
 
-.contact h2 span {
-    color: var(--accent);
-}
+.contact h2 span {color:var(--copper)}
 
-.contact > .container > p {
-    max-width: 480px;
-    margin: 25px auto 35px;
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.9;
+.contact-description {
+    color:#b1b1a4;
+    font-size:13px;
+    line-height:2;
+    max-width:500px;
+    margin:25px auto 35px;
 }
 
 .contact-links {
-    display: flex;
-    justify-content: center;
-    gap: 13px;
-    flex-wrap: wrap;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
 }
+
+.contact-links a {
+    border:1px solid var(--line);
+    padding:13px 18px;
+    font-size:11px;
+    transition:.3s;
+}
+
+.contact-links a:hover {
+    background:var(--cream);
+    color:#171812;
+}
+
+.email {
+    display:block;
+    margin-top:30px;
+    color:var(--copper);
+    font-size:12px;
+}
+
+/* FOOTER */
 
 footer {
-    border-top: 1px solid var(--line);
-    padding: 27px 0;
+    position:relative;
+    z-index:5;
+    background:#171812;
+    padding:24px 8%;
+    border-top:1px solid var(--line);
+    display:flex;
+    justify-content:space-between;
+    color:#969889;
+    font:9px var(--mono);
 }
 
-.footer-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
+/* WHATSAPP */
+
+.whatsapp {
+    position:fixed;
+    z-index:150;
+    right:24px;
+    bottom:24px;
+    width:49px;
+    height:49px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
+    background:#a5ad8c;
+    color:#171812;
+    font-size:21px;
+    box-shadow:0 8px 30px rgba(0,0,0,.35);
+    transition:.3s;
 }
 
-.footer-inner p {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--muted);
-}
-
-.footer-social {
-    display: flex;
-    gap: 22px;
-}
-
-.footer-social a {
-    color: var(--muted);
-    font-size: 11px;
-    transition: .3s;
-}
-
-.footer-social a:hover {
-    color: var(--accent);
-}
-
-/* REVEAL ANIMATIONS */
-
-.reveal {
-    opacity: 0;
-    transform: translateY(35px);
-    transition: opacity .8s ease, transform .8s ease;
-}
-
-.reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
+.whatsapp:hover {
+    transform:translateY(-6px);
+    background:var(--cream);
 }
 
 /* RESPONSIVE */
 
-@media(max-width: 850px) {
-    .hero-grid {
-        grid-template-columns: 1fr;
-        padding-top: 90px;
+@media(max-width:850px) {
+    .hero-grid,.about-grid {
+        grid-template-columns:1fr;
     }
+
+    .editor-scene {margin-top:45px}
+    .about-grid {gap:35px}
+    .skills-grid {grid-template-columns:1fr 1fr}
+}
+
+@media(max-width:600px) {
+    .nav {
+        height:66px;
+        padding:0 5%;
+    }
+
+    .nav-links {gap:12px}
+    .nav-links li:not(:last-child) {display:none}
+
+    section {padding:105px 6%}
 
     .hero h1 {
-        font-size: clamp(55px, 12vw, 85px);
+        font-size:68px;
+        letter-spacing:-5px;
     }
 
-    .scene-wrap {
-        height: 400px;
+    .heading {letter-spacing:-2px}
+
+    .skills-grid,.project-grid {
+        grid-template-columns:1fr;
     }
 
-    .about-grid,
-    .journey-grid {
-        grid-template-columns: 1fr;
-        gap: 45px;
+    .facts {grid-template-columns:1fr 1fr}
+
+    .editor {
+        transform:none;
+        animation:none;
     }
 
-    .project-featured {
-        grid-template-columns: 1fr;
-    }
+    .contact h2 {letter-spacing:-3px}
 
-    .project-visual {
-        min-height: 300px;
-    }
-
-    .project-info {
-        padding: 35px;
-    }
-
-    .section-heading {
-        align-items: start;
-        flex-direction: column;
+    footer {
+        flex-direction:column;
+        gap:12px;
     }
 }
 
-@media(max-width: 600px) {
-    nav {
-        height: 68px;
+@media(prefers-reduced-motion:reduce) {
+    *,*::before,*::after {
+        animation:none!important;
+        transition:none!important;
+        scroll-behavior:auto!important;
     }
 
-    .menu-btn {
-        display: block;
-    }
-
-    .nav-links {
-        display: none;
-        position: absolute;
-        top: 68px;
-        left: 0;
-        width: 100%;
-        padding: 25px 5%;
-        background: #171916;
-        border-bottom: 1px solid var(--line);
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 23px;
-    }
-
-    .nav-links.active {
-        display: flex;
-    }
-
-    .hero {
-        padding-top: 68px;
-    }
-
-    .hero-grid {
-        padding-top: 65px;
-        padding-bottom: 40px;
-    }
-
-    .hero h1 {
-        letter-spacing: -4px;
-    }
-
-    .hero-description {
-        font-size: 13px;
-    }
-
-    .hero-meta {
-        gap: 25px;
-        margin-top: 45px;
-    }
-
-    .scene-wrap {
-        height: 320px;
-    }
-
-    section {
-        padding: 85px 0;
-    }
-
-    .section-heading h2 {
-        letter-spacing: -2px;
-    }
-
-    .capability {
-        grid-template-columns: 40px 1fr 25px;
-        gap: 10px;
-    }
-
-    .capability p {
-        display: none;
-    }
-
-    .capability h3 {
-        font-size: 18px;
-    }
-
-    .other-projects {
-        grid-template-columns: 1fr;
-    }
-
-    .project-info {
-        padding: 27px;
-    }
-
-    .project-info h3 {
-        font-size: 32px;
-    }
-
-    .about-details {
-        grid-template-columns: 1fr;
-    }
-
-    .timeline-item {
-        grid-template-columns: 80px 1fr;
-    }
-
-    .contact h2 {
-        letter-spacing: -3px;
-    }
-
-    .footer-inner {
-        flex-direction: column;
-        text-align: center;
-    }
-}
-
-@media(prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        scroll-behavior: auto !important;
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
+    .reveal {
+        opacity:1;
+        transform:none;
     }
 }
 </style>
@@ -1021,939 +888,1221 @@ footer {
 
 <body>
 
-<header>
-    <nav>
-        <a href="#home" class="logo">RM<span>.</span></a>
+<div class="loader" id="loader">
+    <div class="loader-content">
+        <div class="loader-title">ROHIT MISHRA</div>
+        <div class="loader-bar"><span></span></div>
+        <small>BUILDING AN EXPERIENCE</small>
+    </div>
+</div>
 
-        <button class="menu-btn" id="menuBtn" aria-label="Open navigation">☰</button>
+<div id="world"></div>
+<div class="world-overlay"></div>
+<div class="grain"></div>
+<div class="progress" id="progress"></div>
 
-        <div class="nav-links" id="navLinks">
-            <a href="#about">About</a>
-            <a href="#capabilities">Capabilities</a>
-            <a href="#work">Selected Work</a>
-            <a href="#journey">Journey</a>
-            <a href="#contact" class="nav-contact">Let's Talk ↗</a>
-        </div>
-    </nav>
-</header>
+
+<nav class="nav">
+    <a href="#home" class="logo">rohit<span>.</span></a>
+
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact" class="nav-button">Contact ↗</a></li>
+    </ul>
+</nav>
+
 
 <main>
 
 <!-- HERO -->
 
 <section class="hero" id="home">
-    <div class="container hero-grid">
+<div class="container hero-grid">
 
-        <div class="hero-content reveal">
+    <div class="reveal visible">
+        <div class="eyebrow">COMPUTER SCIENCE · DEVELOPER · INDIA</div>
 
-            <div class="hero-label mono">
-                <span class="status-dot"></span>
-                Building digital experiences
-            </div>
+        <h1>Rohit<br><span>Mishra.</span></h1>
 
-            <h1>
-                Rohit<br>
-                Mishra<span>.</span>
-            </h1>
+        <p class="hero-description">
+            I build things with code. Exploring Python,
+            backend engineering and web development.
+            Turning ideas into useful digital experiences,
+            one project at a time.
+        </p>
 
-            <p class="hero-description">
-                I am a computer science student and aspiring software developer
-                interested in building meaningful digital products.
-                I work across Python, backend engineering and modern web technologies,
-                turning ideas into practical software experiences.
-            </p>
+        <div class="actions">
+            <a href="#projects" class="btn btn-primary">
+                Explore my work ↗
+            </a>
 
-            <div class="hero-actions">
-                <a href="#work" class="btn btn-primary">
-                    Explore my work ↗
-                </a>
-
-                <a href="#contact" class="btn btn-secondary">
-                    Get in touch
-                </a>
-            </div>
-
-            <div class="hero-meta">
-                <div>
-                    <strong>04+</strong>
-                    <small>Selected projects</small>
-                </div>
-
-                <div>
-                    <strong>2028</strong>
-                    <small>Expected graduation</small>
-                </div>
-
-                <div>
-                    <strong>01</strong>
-                    <small>Continuous journey</small>
-                </div>
-            </div>
-
+            <a href="#about" class="btn btn-outline">
+                Discover my journey
+            </a>
         </div>
 
-        <div class="scene-wrap">
-            <div class="scene-index">FIG. 001 — DIGITAL SPACE</div>
+        <div class="identity">
+            <img src="https://avatars.githubusercontent.com/u/269743671?s=400&v=4"
+                 alt="Rohit Mishra profile photo">
 
-            <canvas id="scene"></canvas>
-
-            <div class="floating-note">
-                <strong>Curiosity → Creation</strong>
-                <small>Ideas are better when built.</small>
-            </div>
-
-            <div class="scene-caption">
-                INTERACTIVE 3D ENVIRONMENT
+            <div>
+                <strong>Rohit Mishra</strong>
+                <small>DEVELOPER · INDIA</small>
             </div>
         </div>
-
     </div>
+
+
+    <!-- CODE EDITOR -->
+
+    <div class="editor-scene reveal">
+        <div class="editor">
+
+            <div class="editor-top">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="editor-name">rohit.py — VS CODE</span>
+            </div>
+
+            <div class="editor-body">
+                <div class="line-numbers" id="lineNumbers"></div>
+                <div class="code" id="typingCode"></div>
+            </div>
+
+            <div class="terminal">
+                <div><span>➜</span> python rohit.py</div>
+                <div id="terminalText">Initializing developer environment...</div>
+                <div><span>✓</span> Process completed successfully.</div>
+            </div>
+
+        </div>
+
+        <div class="editor-label">
+            A LITTLE LOOK INSIDE MY WORLD
+        </div>
+    </div>
+
+</div>
+
+<div class="scroll-indicator">
+    SCROLL TO EXPLORE <span>↓</span>
+</div>
 </section>
 
-<!-- TICKER -->
-
-<div class="ticker">
-    <div class="ticker-track">
-        <span>PYTHON <b>✳</b></span>
-        <span>DJANGO <b>✳</b></span>
-        <span>JAVASCRIPT <b>✳</b></span>
-        <span>REST APIS <b>✳</b></span>
-        <span>DATABASES <b>✳</b></span>
-        <span>SOFTWARE DEVELOPMENT <b>✳</b></span>
-        <span>PYTHON <b>✳</b></span>
-        <span>DJANGO <b>✳</b></span>
-        <span>JAVASCRIPT <b>✳</b></span>
-        <span>REST APIS <b>✳</b></span>
-        <span>DATABASES <b>✳</b></span>
-        <span>SOFTWARE DEVELOPMENT <b>✳</b></span>
-    </div>
-</div>
 
 <!-- ABOUT -->
 
-<section id="about">
-    <div class="container">
+<section class="about" id="about">
+<div class="container">
 
-        <div class="section-heading reveal">
-            <div>
-                <div class="mono">01 / A little about me</div>
-                <h2>Beyond the code.</h2>
-            </div>
+    <div class="eyebrow reveal">01 / THE PERSON BEHIND THE CODE</div>
 
-            <p>
-                Technology is not just about writing code.
-                It is about understanding problems and building useful solutions.
-            </p>
+    <div class="about-grid">
+
+        <div class="about-statement reveal">
+            Not just writing code.<br>
+            <span>Learning how things work.</span>
         </div>
 
-        <div class="about-grid">
+        <div class="about-copy reveal">
 
-            <div class="about-side reveal">
-                <div class="big-number">01</div>
-                <p>
-                    A student of computer science, learning by building,
-                    experimenting and improving one project at a time.
-                </p>
-            </div>
+            <p>
+                I'm Rohit Mishra, a Computer Science student
+                interested in software development and building
+                practical digital products.
+            </p>
 
-            <div class="about-content reveal">
+            <p>
+                My journey started with programming fundamentals
+                and gradually moved towards Python, Django,
+                databases, APIs and frontend technologies.
+            </p>
 
-                <h3>
-                    I enjoy the process of turning an idea
-                    into something people can actually use.
-                </h3>
+            <p>
+                I enjoy understanding what happens behind an
+                application — how data moves, how APIs communicate
+                and how different parts work together.
+            </p>
 
-                <p>
-                    My journey started with programming fundamentals and gradually
-                    expanded into web development, backend systems, databases
-                    and API development.
-                </p>
+            <p>
+                I'm currently focused on improving my problem-solving
+                skills, strengthening development fundamentals
+                and building complete projects.
+            </p>
 
-                <p>
-                    I enjoy working with Python and Django, exploring how
-                    applications work behind the scenes, and creating interfaces
-                    that make technology easier to interact with.
-                </p>
-
-                <p>
-                    I believe good software comes from curiosity, consistency
-                    and a willingness to understand the problem before writing
-                    the solution.
-                </p>
-
-                <div class="about-details">
-
-                    <div class="detail-item">
-                        <span>EDUCATION</span>
-                        <strong>Bachelor of Computer Applications</strong>
-                    </div>
-
-                    <div class="detail-item">
-                        <span>INSTITUTION</span>
-                        <strong>GNIM — GN Group of Institutions</strong>
-                    </div>
-
-                    <div class="detail-item">
-                        <span>UNIVERSITY</span>
-                        <strong>Chaudhary Charan Singh University</strong>
-                    </div>
-
-                    <div class="detail-item">
-                        <span>FOCUS</span>
-                        <strong>Software & Web Development</strong>
-                    </div>
-
+            <div class="facts">
+                <div class="fact">
+                    <small>Primary language</small>
+                    <strong>Python</strong>
                 </div>
 
-            </div>
-        </div>
+                <div class="fact">
+                    <small>Development focus</small>
+                    <strong>Software Development</strong>
+                </div>
 
-    </div>
-</section>
+                <div class="fact">
+                    <small>Currently learning</small>
+                    <strong>DSA & Backend</strong>
+                </div>
 
-<!-- CAPABILITIES -->
-
-<section class="capabilities" id="capabilities">
-    <div class="container">
-
-        <div class="section-heading reveal">
-            <div>
-                <div class="mono">02 / What I work with</div>
-                <h2>Capabilities.</h2>
-            </div>
-
-            <p>
-                A growing technical foundation focused on application
-                development, backend systems and problem solving.
-            </p>
-        </div>
-
-        <div class="capability-list">
-
-            <div class="capability reveal">
-                <span class="capability-number">01</span>
-                <h3>Backend Development</h3>
-                <p>
-                    Python, Django, Django REST Framework,
-                    authentication, APIs and application logic.
-                </p>
-                <span class="capability-arrow">↗</span>
-            </div>
-
-            <div class="capability reveal">
-                <span class="capability-number">02</span>
-                <h3>Frontend Development</h3>
-                <p>
-                    HTML, CSS, JavaScript, DOM manipulation,
-                    responsive layouts and interactive interfaces.
-                </p>
-                <span class="capability-arrow">↗</span>
-            </div>
-
-            <div class="capability reveal">
-                <span class="capability-number">03</span>
-                <h3>Database Engineering</h3>
-                <p>
-                    SQL, MySQL, PostgreSQL, data modelling
-                    and Django ORM.
-                </p>
-                <span class="capability-arrow">↗</span>
-            </div>
-
-            <div class="capability reveal">
-                <span class="capability-number">04</span>
-                <h3>Tools & Workflow</h3>
-                <p>
-                    Git, GitHub, VS Code, API testing
-                    and development workflows.
-                </p>
-                <span class="capability-arrow">↗</span>
-            </div>
-
-            <div class="capability reveal">
-                <span class="capability-number">05</span>
-                <h3>Programming Foundations</h3>
-                <p>
-                    Python, object-oriented programming,
-                    data structures and algorithms.
-                </p>
-                <span class="capability-arrow">↗</span>
+                <div class="fact">
+                    <small>My approach</small>
+                    <strong>Learn · Build · Improve</strong>
+                </div>
             </div>
 
         </div>
     </div>
+</div>
 </section>
 
-<!-- WORK -->
 
-<section id="work">
-    <div class="container">
+<!-- SKILLS -->
 
-        <div class="section-heading reveal">
-            <div>
-                <div class="mono">03 / Selected projects</div>
-                <h2>Things I've built.</h2>
+<section class="skills" id="skills">
+<div class="container">
+
+    <div class="eyebrow reveal">02 / MY TECHNICAL UNIVERSE</div>
+
+    <h2 class="heading reveal">
+        The tools behind<br><span>the ideas.</span>
+    </h2>
+
+    <p class="description reveal">
+        Technologies and concepts I've been learning
+        and applying while building software.
+    </p>
+
+    <div class="skills-grid">
+
+        <div class="skill reveal">
+            <small>01 / PROGRAMMING</small>
+            <h3>Languages</h3>
+            <div class="tags">
+                <span>Python</span><span>JavaScript</span>
+                <span>SQL</span><span>HTML5</span><span>CSS3</span>
             </div>
-
-            <p>
-                A collection of projects that reflect my interests
-                in software engineering and practical problem solving.
-            </p>
         </div>
 
-        <div class="projects-intro">
-            <span class="mono">FEATURED PROJECTS / 02</span>
-            <p>Selected work and experiments</p>
+        <div class="skill reveal">
+            <small>02 / BACKEND</small>
+            <h3>Frameworks</h3>
+            <div class="tags">
+                <span>Django</span><span>DRF</span>
+                <span>REST APIs</span><span>JWT</span>
+            </div>
         </div>
 
-        <!-- HIREGENIE -->
+        <div class="skill reveal">
+            <small>03 / DATABASE</small>
+            <h3>Data</h3>
+            <div class="tags">
+                <span>MySQL</span><span>PostgreSQL</span>
+                <span>SQLite</span><span>ORM</span>
+            </div>
+        </div>
 
-        <article class="project-featured reveal">
+        <div class="skill reveal">
+            <small>04 / FRONTEND</small>
+            <h3>Web</h3>
+            <div class="tags">
+                <span>HTML</span><span>CSS</span>
+                <span>JavaScript</span><span>DOM</span>
+            </div>
+        </div>
 
-            <div class="project-visual visual-hire">
+        <div class="skill reveal">
+            <small>05 / WORKFLOW</small>
+            <h3>Developer Tools</h3>
+            <div class="tags">
+                <span>Git</span><span>GitHub</span>
+                <span>VS Code</span><span>Postman</span>
+            </div>
+        </div>
 
-                <div class="visual-art">
-                    <div class="art-top">
-                        <span>HIREGENIE / DASHBOARD</span>
-                        <span class="art-dot"></span>
-                    </div>
+        <div class="skill reveal">
+            <small>06 / FUNDAMENTALS</small>
+            <h3>Core Concepts</h3>
+            <div class="tags">
+                <span>OOP</span><span>DSA</span>
+                <span>Algorithms</span><span>Problem Solving</span>
+            </div>
+        </div>
 
-                    <div class="art-title">
-                        Find your<br>next opportunity.
-                    </div>
+    </div>
+</div>
+</section>
 
-                    <div class="art-lines">
-                        <i></i><i></i><i></i>
-                    </div>
 
-                    <div class="art-footer">
-                        <span>AI MATCHING</span>
-                        <span>CAREER TOOLS</span>
-                    </div>
-                </div>
+<!-- PROJECTS -->
 
+<section class="projects" id="projects">
+<div class="container">
+
+    <div class="eyebrow reveal">03 / WORLDS I HAVE BUILT</div>
+
+    <h2 class="heading reveal">
+        From ideas<br><span>to applications.</span>
+    </h2>
+
+    <p class="description reveal">
+        Every project represents a problem explored,
+        a concept learned and something brought to life.
+    </p>
+
+    <div class="project-grid">
+
+        <article class="project reveal">
+            <div class="project-visual">
+                <div class="project-symbol">Hire<span>Genie.</span></div>
             </div>
 
-            <div class="project-info">
-
-                <div class="project-topline">
-                    <span class="project-tag">01 / Featured project</span>
-                    <span class="project-year">2026</span>
-                </div>
-
-                <h3>HireGenie.</h3>
+            <div class="project-content">
+                <div class="project-meta">FEATURED PROJECT / 01</div>
+                <h3>HireGenie</h3>
 
                 <p>
-                    An AI-enabled freelance and career platform designed
-                    to connect opportunities with talent. The project
-                    brings together career-oriented tools, user workflows
-                    and intelligent matching into one application.
+                    An AI-enabled freelance marketplace designed
+                    around connecting freelancers and clients.
+                    Explores authentication, job workflows,
+                    proposals and intelligent profile matching.
                 </p>
 
-                <div class="project-tech">
-                    <span>Python</span>
-                    <span>Django</span>
+                <div class="tags">
+                    <span>Python</span><span>Django</span>
                     <span>Machine Learning</span>
-                    <span>TF-IDF</span>
-                    <span>JavaScript</span>
                 </div>
 
                 <div class="project-links">
                     <a href="https://hiregenie-go83.onrender.com"
-                       target="_blank" rel="noopener">
-                        Live project ↗
-                    </a>
+                       target="_blank" rel="noopener noreferrer">Live Demo ↗</a>
 
                     <a href="https://github.com/rohitmishra-devops/HireGenie"
-                       target="_blank" rel="noopener">
-                        Source code ↗
-                    </a>
+                       target="_blank" rel="noopener noreferrer">GitHub ↗</a>
                 </div>
-
             </div>
         </article>
 
-        <!-- BHAROSA AI -->
 
-        <article class="project-featured reveal">
-
-            <div class="project-visual visual-bharosa">
-
-                <div class="visual-art">
-                    <div class="art-top">
-                        <span>BHAROSA AI / PLATFORM</span>
-                        <span class="art-dot"></span>
-                    </div>
-
-                    <div class="art-title">
-                        Trust in<br>every interaction.
-                    </div>
-
-                    <div class="art-lines">
-                        <i></i><i></i><i></i>
-                    </div>
-
-                    <div class="art-footer">
-                        <span>BHAROSA AI</span>
-                        <span>WEB PLATFORM</span>
-                    </div>
-                </div>
-
+        <article class="project reveal">
+            <div class="project-visual">
+                <div class="project-symbol">Bharosa <span>AI.</span></div>
             </div>
 
-            <div class="project-info">
-
-                <div class="project-topline">
-                    <span class="project-tag">02 / Featured project</span>
-                    <span class="project-year">2026</span>
-                </div>
-
-                <h3>Bharosa AI.</h3>
+            <div class="project-content">
+                <div class="project-meta">FEATURED PROJECT / 02</div>
+                <h3>Bharosa AI</h3>
 
                 <p>
-                    An AI-focused web project exploring the intersection
-                    of technology, trust and digital experiences.
-                    Built as part of my journey into developing
-                    practical AI-powered applications.
+                    An independent web project exploring
+                    the development of an AI-focused digital
+                    experience. Visit the live application
+                    to explore the project.
                 </p>
 
-                <div class="project-tech">
-                    <span>AI</span>
-                    <span>Web Development</span>
-                    <span>Python</span>
+                <div class="tags">
+                    <span>AI</span><span>Web Development</span>
                     <span>Application Development</span>
                 </div>
 
                 <div class="project-links">
                     <a href="https://bharosa-ai.onrender.com/"
-                       target="_blank" rel="noopener">
-                        Live project ↗
-                    </a>
+                       target="_blank" rel="noopener noreferrer">Live Demo ↗</a>
 
                     <a href="https://github.com/rohitmishra-devops"
-                       target="_blank" rel="noopener">
-                        GitHub profile ↗
-                    </a>
+                       target="_blank" rel="noopener noreferrer">GitHub ↗</a>
                 </div>
-
             </div>
         </article>
 
-        <!-- OTHER PROJECTS -->
 
-        <div class="mono" style="margin-top:65px">
-            MORE EXPLORATIONS / 02
-        </div>
+        <article class="project reveal">
+            <div class="project-visual">
+                <div class="project-symbol">Career <span>AI.</span></div>
+            </div>
 
-        <div class="other-projects">
-
-            <article class="small-project reveal">
-
-                <span class="project-tag">03 / AI APPLICATION</span>
-
-                <h3>AI Career Assistant.</h3>
+            <div class="project-content">
+                <div class="project-meta">APPLICATION PROJECT / 03</div>
+                <h3>AI Career Assistant</h3>
 
                 <p>
-                    A career-focused project exploring how intelligent
-                    tools can support users with career-related tasks
-                    and professional development.
+                    A project exploring how technology and AI
+                    can support career-related tasks and
+                    professional development.
                 </p>
 
-                <div class="project-tech">
-                    <span>Python</span>
-                    <span>AI</span>
+                <div class="tags">
+                    <span>Python</span><span>AI</span>
                     <span>Web Development</span>
                 </div>
 
-                <a href="https://github.com/rohitmishra-devops"
-                   target="_blank" rel="noopener">
-                    Explore on GitHub ↗
-                </a>
+                <div class="project-links">
+                    <a href="https://github.com/rohitmishra-devops"
+                       target="_blank" rel="noopener noreferrer">Explore GitHub ↗</a>
+                </div>
+            </div>
+        </article>
 
-            </article>
 
-            <article class="small-project reveal">
+        <article class="project reveal">
+            <div class="project-visual">
+                <div class="project-symbol">Image <span>Editor.</span></div>
+            </div>
 
-                <span class="project-tag">04 / WEB APPLICATION</span>
-
-                <h3>Image Editor.</h3>
+            <div class="project-content">
+                <div class="project-meta">WEB APPLICATION / 04</div>
+                <h3>Image Editor</h3>
 
                 <p>
-                    A web-based image editing project focused on
-                    visual interaction and exploring image-related
-                    functionality through software.
+                    A web-based image editing project focused
+                    on an interactive interface for working
+                    with images and visual adjustments.
                 </p>
 
-                <div class="project-tech">
-                    <span>Python</span>
+                <div class="tags">
+                    <span>HTML</span><span>CSS</span>
                     <span>JavaScript</span>
-                    <span>Web Development</span>
                 </div>
 
-                <a href="https://github.com/rohitmishra-devops"
-                   target="_blank" rel="noopener">
-                    Explore on GitHub ↗
-                </a>
+                <div class="project-links">
+                    <a href="https://github.com/rohitmishra-devops"
+                       target="_blank" rel="noopener noreferrer">Explore GitHub ↗</a>
+                </div>
+            </div>
+        </article>
 
-            </article>
+    </div>
 
+    <p class="project-note reveal">
+        More experiments and development work on my GitHub profile.
+    </p>
+</div>
+</section>
+
+
+<!-- EDUCATION -->
+
+<section class="education" id="education">
+<div class="container">
+
+    <div class="eyebrow reveal">04 / THE FOUNDATION</div>
+
+    <h2 class="heading reveal">
+        Where the journey<br><span>continues.</span>
+    </h2>
+
+    <div class="timeline">
+
+        <div class="timeline-item reveal">
+            <small>2025 — 2028</small>
+            <h3>Bachelor of Computer Applications</h3>
+            <p>
+                GNIM — GN Group of Institutions<br>
+                Affiliated with Chaudhary Charan Singh University (CCSU)
+            </p>
         </div>
 
     </div>
+</div>
 </section>
 
-<!-- JOURNEY -->
-
-<section class="journey" id="journey">
-    <div class="container">
-
-        <div class="section-heading reveal">
-            <div>
-                <div class="mono">04 / The journey</div>
-                <h2>Learning by building.</h2>
-            </div>
-        </div>
-
-        <div class="journey-grid">
-
-            <div class="journey-intro reveal">
-
-                <div class="mono">A WORK IN PROGRESS</div>
-
-                <h3>
-                    Every project is another step forward.
-                </h3>
-
-                <p>
-                    My development journey is driven by curiosity
-                    and practical learning. I focus on strengthening
-                    my fundamentals while building applications
-                    that challenge me to learn something new.
-                </p>
-
-            </div>
-
-            <div class="timeline reveal">
-
-                <div class="timeline-item">
-                    <time>FOUNDATIONS</time>
-                    <div>
-                        <h4>Programming & Computer Science</h4>
-                        <p>
-                            Building a foundation in programming,
-                            Python, OOP and problem solving.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <time>WEB</time>
-                    <div>
-                        <h4>Web & Backend Development</h4>
-                        <p>
-                            Exploring frontend development,
-                            Django, databases and REST APIs.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <time>PROJECTS</time>
-                    <div>
-                        <h4>Building Real Applications</h4>
-                        <p>
-                            Developing projects such as HireGenie
-                            and Bharosa AI while learning through
-                            practical implementation.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="timeline-item">
-                    <time>NEXT</time>
-                    <div>
-                        <h4>Growing as a Software Developer</h4>
-                        <p>
-                            Improving engineering fundamentals,
-                            writing better software and exploring
-                            more challenging projects.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-</section>
 
 <!-- CONTACT -->
 
 <section class="contact" id="contact">
-    <div class="container reveal">
+<div class="container">
 
-        <div class="mono">05 / Have something in mind?</div>
+    <div class="eyebrow reveal">05 / THE NEXT CONNECTION</div>
 
-        <h2>
-            Let's build<br>
-            something <span>meaningful.</span>
-        </h2>
+    <h2 class="reveal">
+        Let's build<br><span>something.</span>
+    </h2>
 
-        <p>
-            Interested in collaborating, discussing ideas,
-            exploring opportunities or building something useful?
-            I'd be happy to connect.
-        </p>
+    <p class="contact-description reveal">
+        I'm interested in software development, meaningful
+        projects and opportunities to learn and contribute.
+        If you have something interesting in mind, let's connect.
+    </p>
 
-        <div class="contact-links">
+    <div class="contact-links reveal">
 
-            <a href="mailto:rohitmishra13214@gmail.com"
-               class="btn btn-primary">
-                Send an email ↗
-            </a>
+        <a href="mailto:rohitmishra13214@gmail.com">Email ↗</a>
 
-            <a href="https://linkedin.com/in/rohit-mishra-8361853b3"
-               target="_blank" rel="noopener"
-               class="btn btn-secondary">
-                LinkedIn ↗
-            </a>
+        <a href="https://github.com/rohitmishra-devops"
+           target="_blank" rel="noopener noreferrer">GitHub ↗</a>
 
-            <a href="https://github.com/rohitmishra-devops"
-               target="_blank" rel="noopener"
-               class="btn btn-secondary">
-                GitHub ↗
-            </a>
+        <a href="https://linkedin.com/in/rohit-mishra-8361853b3"
+           target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
 
-        </div>
+        <a href="https://wa.me/919354351730"
+           target="_blank" rel="noopener noreferrer">WhatsApp ↗</a>
 
     </div>
+
+    <a href="mailto:rohitmishra13214@gmail.com" class="email">
+        rohitmishra13214@gmail.com
+    </a>
+
+</div>
 </section>
 
 </main>
 
+
 <footer>
-    <div class="container footer-inner">
-
-        <p>© <span id="year"></span> ROHIT MISHRA. BUILT WITH INTENTION.</p>
-
-        <div class="footer-social">
-            <a href="https://github.com/rohitmishra-devops"
-               target="_blank" rel="noopener">GITHUB ↗</a>
-
-            <a href="https://linkedin.com/in/rohit-mishra-8361853b3"
-               target="_blank" rel="noopener">LINKEDIN ↗</a>
-
-            <a href="mailto:rohitmishra13214@gmail.com">EMAIL ↗</a>
-        </div>
-
-    </div>
+    <span>© 2026 ROHIT MISHRA</span>
+    <span>DESIGNED THROUGH CODE · BUILT WITH CURIOSITY</span>
 </footer>
 
-<!-- THREE.JS -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<a class="whatsapp"
+   href="https://wa.me/919354351730"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Contact on WhatsApp">✆</a>
+
 
 <script>
+/* CODE EDITOR TYPING EFFECT */
 
-// YEAR
+const codeLines = [
+    '<span class="comment"># A little about me</span>',
+    '<span class="keyword">class</span> <span class="function">Developer</span>:',
+    '    <span class="keyword">def</span> <span class="function">__init__</span>(self):',
+    '        self.name = <span class="string">"Rohit Mishra"</span>',
+    '        self.language = <span class="string">"Python"</span>',
+    '        self.focus = <span class="string">"Building software"</span>',
+    '',
+    '    <span class="keyword">def</span> <span class="function">create</span>(self):',
+    '        <span class="keyword">return</span> <span class="string">"Ideas into reality"</span>',
+    '',
+    'developer = Developer()',
+    'developer.create()'
+];
 
-document.getElementById("year").textContent =
-    new Date().getFullYear();
+const codeBox = document.getElementById("typingCode");
+const lineBox = document.getElementById("lineNumbers");
+
+let lineIndex = 0;
+let charIndex = 0;
+let currentLine = "";
+
+function typeCode() {
+    if (lineIndex >= codeLines.length) return;
+
+    const line = codeLines[lineIndex];
+
+    if (line === "") {
+        codeBox.innerHTML += "<br>";
+        lineBox.innerHTML += "<span>&nbsp;</span>";
+        lineIndex++;
+        setTimeout(typeCode, 180);
+        return;
+    }
+
+    const plain = line.replace(/<[^>]*>/g, "");
+
+    if (charIndex === 0) {
+        currentLine = "";
+        lineBox.innerHTML += `<span>${lineIndex + 1}</span>`;
+    }
+
+    currentLine = plain.substring(0, charIndex + 1);
+
+    const temporary = document.createElement("div");
+    temporary.innerHTML = line;
+
+    let output = "";
+    let visible = 0;
+
+    function revealHTML(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+            const remaining = Math.max(0, charIndex - visible + 1);
+            const part = node.textContent.substring(0, remaining);
+            visible += node.textContent.length;
+            return part;
+        }
+
+        if (node.nodeType === Node.ELEMENT_NODE) {
+            const content = Array.from(node.childNodes)
+                .map(revealHTML).join("");
+
+            return `<${node.tagName.toLowerCase()} class="${node.className}">${content}</${node.tagName.toLowerCase()}>`;
+        }
+
+        return "";
+    }
+
+    output = Array.from(temporary.childNodes)
+        .map(revealHTML).join("");
+
+    const previous = codeLines.slice(0, lineIndex)
+        .map(l => l === "" ? "<br>" : l)
+        .join("<br>");
+
+    codeBox.innerHTML =
+        previous + (previous ? "<br>" : "") +
+        output + '<span class="cursor"></span>';
+
+    charIndex++;
+
+    if (charIndex < plain.length) {
+        setTimeout(typeCode, 30);
+    } else {
+        lineIndex++;
+        charIndex = 0;
+        setTimeout(typeCode, 220);
+    }
+}
+
+setTimeout(typeCode, 1800);
+
+const terminalMessages = [
+    "Loading Python environment...",
+    "Connecting development tools...",
+    "Ready to build something useful."
+];
+
+let terminalIndex = 0;
+
+setInterval(() => {
+    terminalIndex = (terminalIndex + 1) % terminalMessages.length;
+    document.getElementById("terminalText").textContent =
+        terminalMessages[terminalIndex];
+}, 3000);
 
 
-// MOBILE MENU
-
-const menuBtn = document.getElementById("menuBtn");
-const navLinks = document.getElementById("navLinks");
-
-menuBtn.addEventListener("click", () => {
-    navLinks.classList.toggle("active");
-
-    menuBtn.textContent =
-        navLinks.classList.contains("active") ? "×" : "☰";
-});
-
-document.querySelectorAll(".nav-links a").forEach(link => {
-    link.addEventListener("click", () => {
-        navLinks.classList.remove("active");
-        menuBtn.textContent = "☰";
-    });
-});
-
-
-// SCROLL REVEAL
+/* SCROLL REVEAL */
 
 const observer = new IntersectionObserver(entries => {
-
     entries.forEach(entry => {
-
         if (entry.isIntersecting) {
             entry.target.classList.add("visible");
             observer.unobserve(entry.target);
         }
-
     });
+}, {threshold:.12});
 
-}, {
-    threshold: 0.12
-});
-
-document.querySelectorAll(".reveal").forEach(element => {
-    observer.observe(element);
+document.querySelectorAll(".reveal").forEach(el => {
+    observer.observe(el);
 });
 
 
-// 3D ENVIRONMENT
+/* PAGE PROGRESS */
 
-const canvas = document.getElementById("scene");
+window.addEventListener("scroll", () => {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const value = max > 0 ? scrollY / max * 100 : 0;
+    document.getElementById("progress").style.width = value + "%";
+}, {passive:true});
 
-if (canvas && window.THREE) {
 
-    const scene = new THREE.Scene();
+/* LOADER */
 
-    scene.background = null;
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        document.getElementById("loader").classList.add("hide");
+    }, 1400);
+});
+</script>
 
-    const camera = new THREE.PerspectiveCamera(
-        45,
-        canvas.clientWidth / canvas.clientHeight,
-        0.1,
-        100
+
+<!-- THREE.JS CINEMATIC ENVIRONMENT -->
+
+<script type="module">
+
+import * as THREE from
+"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js";
+
+
+const host = document.getElementById("world");
+
+const mobile = innerWidth < 700;
+
+const reduceMotion = matchMedia(
+    "(prefers-reduced-motion: reduce)"
+).matches;
+
+let scene, camera, renderer, clock;
+let scroll = 0;
+let mouseX = 0;
+let mouseY = 0;
+let targetX = 0;
+let targetY = 0;
+let raf = null;
+
+const floatingObjects = [];
+const rings = [];
+const movingLights = [];
+
+try {
+
+    scene = new THREE.Scene();
+
+    scene.background = new THREE.Color(0x171812);
+
+    scene.fog = new THREE.FogExp2(0x171812, 0.009);
+
+    camera = new THREE.PerspectiveCamera(
+        55,
+        innerWidth / innerHeight,
+        .1,
+        250
     );
 
-    camera.position.set(0, 0, 9);
+    camera.position.set(0, 3, 13);
 
-    const renderer = new THREE.WebGLRenderer({
-        canvas: canvas,
+    renderer = new THREE.WebGLRenderer({
+        antialias: !mobile,
         alpha: true,
-        antialias: true
+        powerPreference: "high-performance"
     });
+
+    renderer.setSize(innerWidth, innerHeight);
 
     renderer.setPixelRatio(
-        Math.min(window.devicePixelRatio, 2)
+        Math.min(devicePixelRatio, mobile ? 1.2 : 1.6)
     );
 
-    renderer.setSize(
-        canvas.clientWidth,
-        canvas.clientHeight
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
+
+    host.appendChild(renderer.domElement);
+
+    clock = new THREE.Clock();
+
+
+    /* LIGHTS */
+
+    scene.add(
+        new THREE.AmbientLight(0xd5cbb1, 1.1)
     );
 
-    renderer.outputEncoding = THREE.sRGBEncoding;
-
-    // LIGHTING
-
-    const ambient = new THREE.AmbientLight(
-        0xffffff,
-        0.7
+    const copperLight = new THREE.PointLight(
+        0xc28e69, 160, 100
     );
 
-    scene.add(ambient);
+    copperLight.position.set(0, 8, 5);
+    scene.add(copperLight);
 
-    const mainLight = new THREE.PointLight(
-        0xc6a77a,
-        3,
-        20
+    movingLights.push(copperLight);
+
+    const oliveLight = new THREE.PointLight(
+        0xa5ad8c, 110, 90
     );
 
-    mainLight.position.set(3, 3, 5);
-    scene.add(mainLight);
+    oliveLight.position.set(-12, 5, -15);
+    scene.add(oliveLight);
 
-    const secondaryLight = new THREE.PointLight(
-        0x718b80,
-        2,
-        15
+    movingLights.push(oliveLight);
+
+    const warmLight = new THREE.PointLight(
+        0xe3c9a1, 100, 80
     );
 
-    secondaryLight.position.set(-4, -2, 2);
-    scene.add(secondaryLight);
+    warmLight.position.set(12, 2, -35);
+    scene.add(warmLight);
+
+    movingLights.push(warmLight);
 
 
-    // MAIN SCULPTURE
+    /* MATERIALS */
 
-    const sculpture = new THREE.Group();
-
-    scene.add(sculpture);
-
-    const material = new THREE.MeshStandardMaterial({
-        color: 0xc6a77a,
-        metalness: 0.82,
-        roughness: 0.23
+    const stone = new THREE.MeshStandardMaterial({
+        color:0x65634d,
+        roughness:.8,
+        metalness:.15
     });
 
-    const innerMaterial = new THREE.MeshStandardMaterial({
-        color: 0x65766b,
-        metalness: 0.75,
-        roughness: 0.3
+    const olive = new THREE.MeshStandardMaterial({
+        color:0x737c60,
+        roughness:.55,
+        metalness:.3
     });
 
-    // LARGE RINGS
-
-    for (let i = 0; i < 4; i++) {
-
-        const geometry = new THREE.TorusGeometry(
-            2.1 - i * 0.27,
-            0.025,
-            16,
-            120
-        );
-
-        const ring = new THREE.Mesh(
-            geometry,
-            i % 2 === 0 ? material : innerMaterial
-        );
-
-        ring.rotation.x = Math.PI / 2.5 + i * 0.35;
-        ring.rotation.y = i * 0.65;
-
-        sculpture.add(ring);
-
-    }
-
-
-    // CENTRAL OBJECT
-
-    const coreGeometry = new THREE.IcosahedronGeometry(
-        0.72,
-        2
-    );
-
-    const coreMaterial = new THREE.MeshStandardMaterial({
-        color: 0xc6a77a,
-        metalness: 0.8,
-        roughness: 0.2,
-        flatShading: true
+    const copper = new THREE.MeshStandardMaterial({
+        color:0xb27b56,
+        roughness:.32,
+        metalness:.65
     });
 
-    const core = new THREE.Mesh(
-        coreGeometry,
-        coreMaterial
-    );
-
-    sculpture.add(core);
-
-
-    // SMALL FLOATING OBJECTS
-
-    const particles = new THREE.Group();
-
-    scene.add(particles);
-
-    const particleGeometry = new THREE.SphereGeometry(
-        0.035,
-        10,
-        10
-    );
-
-    const particleMaterial = new THREE.MeshStandardMaterial({
-        color: 0xc6a77a,
-        emissive: 0x3b2812
+    const dark = new THREE.MeshStandardMaterial({
+        color:0x282b20,
+        roughness:.65,
+        metalness:.25
     });
 
-    for (let i = 0; i < 65; i++) {
-
-        const particle = new THREE.Mesh(
-            particleGeometry,
-            particleMaterial
-        );
-
-        particle.position.set(
-            (Math.random() - 0.5) * 8,
-            (Math.random() - 0.5) * 7,
-            (Math.random() - 0.5) * 4
-        );
-
-        particles.add(particle);
-
-    }
+    const cream = new THREE.MeshStandardMaterial({
+        color:0xc9c0a8,
+        roughness:.5,
+        metalness:.2
+    });
 
 
-    // GRID FLOOR
+    /* GROUND */
+
+    const ground = new THREE.Mesh(
+        new THREE.PlaneGeometry(180,180),
+        new THREE.MeshStandardMaterial({
+            color:0x282a20,
+            roughness:.65,
+            metalness:.2
+        })
+    );
+
+    ground.rotation.x = -Math.PI / 2;
+    ground.position.y = -3;
+    ground.position.z = -35;
+    scene.add(ground);
+
+
+    /* FLOOR GRID */
 
     const grid = new THREE.GridHelper(
-        12,
-        30,
-        0x6b5940,
-        0x34372f
+        120, 65, 0x77745d, 0x444638
     );
 
-    grid.position.y = -2.5;
-    grid.position.z = -1;
-
+    grid.position.set(0,-2.97,-35);
     grid.material.transparent = true;
-    grid.material.opacity = 0.22;
-
+    grid.material.opacity = .22;
     scene.add(grid);
 
 
-    // MOUSE INTERACTION
+    /* ARCHITECTURAL CORRIDOR */
 
-    let mouseX = 0;
-    let mouseY = 0;
+    const architecture = new THREE.Group();
+    scene.add(architecture);
 
-    window.addEventListener("mousemove", event => {
+    const count = mobile ? 8 : 15;
 
-        mouseX = (
-            event.clientX / window.innerWidth - 0.5
+    for(let i=0;i<count;i++){
+
+        const frame = new THREE.Group();
+
+        const z = -i * 8;
+        const width = 7 + Math.sin(i * .5) * 1.3;
+        const height = 6;
+
+        frame.position.z = z;
+
+        // Left pillar
+        const left = new THREE.Mesh(
+            new THREE.BoxGeometry(.32,height,.45),
+            i % 2 ? stone : olive
         );
 
-        mouseY = (
-            event.clientY / window.innerHeight - 0.5
+        left.position.set(-width/2,0,0);
+        frame.add(left);
+
+        // Right pillar
+        const right = left.clone();
+        right.position.x = width/2;
+        frame.add(right);
+
+        // Top beam
+        const beam = new THREE.Mesh(
+            new THREE.BoxGeometry(width+.5,.35,.6),
+            copper
         );
+
+        beam.position.y = height/2;
+        frame.add(beam);
+
+        // Base
+        const base = new THREE.Mesh(
+            new THREE.BoxGeometry(width+.8,.25,1),
+            dark
+        );
+
+        base.position.y = -height/2;
+        frame.add(base);
+
+        // Ceiling panel
+        const ceiling = new THREE.Mesh(
+            new THREE.BoxGeometry(width, .12, 3),
+            i % 2 ? cream : dark
+        );
+
+        ceiling.position.set(0,height/2+1.4,0);
+        frame.add(ceiling);
+
+        // Side floating lights
+        const lightBar = new THREE.Mesh(
+            new THREE.BoxGeometry(.08,2.2,.08),
+            copper
+        );
+
+        lightBar.position.set(-width/2-.7,0,0);
+        frame.add(lightBar);
+
+        const lightBar2 = lightBar.clone();
+        lightBar2.position.x = width/2+.7;
+        frame.add(lightBar2);
+
+        architecture.add(frame);
+    }
+
+
+    /* FLOATING BUILDINGS */
+
+    for(let i=0;i<(mobile?9:22);i++){
+
+        const height = 2 + Math.random()*7;
+
+        const building = new THREE.Mesh(
+            new THREE.BoxGeometry(
+                1.5+Math.random()*3,
+                height,
+                1.5+Math.random()*3
+            ),
+            i%3===0 ? copper : (i%2===0 ? olive : stone)
+        );
+
+        building.position.set(
+            (Math.random()-.5)*35,
+            height/2-2,
+            -Math.random()*115
+        );
+
+        building.rotation.y = Math.random()*.5;
+
+        scene.add(building);
+
+        floatingObjects.push({
+            object:building,
+            initialY:building.position.y,
+            speed:.25+Math.random()*.4,
+            rotation:.001+Math.random()*.003
+        });
+    }
+
+
+    /* FLOATING GEOMETRIC STRUCTURES */
+
+    for(let i=0;i<(mobile?7:15);i++){
+
+        const shape = new THREE.Mesh(
+            new THREE.TorusKnotGeometry(
+                .7+Math.random()*.7,
+                .06,
+                80,
+                8
+            ),
+            i%2 ? copper : olive
+        );
+
+        shape.position.set(
+            (Math.random()-.5)*24,
+            Math.random()*10,
+            -Math.random()*100
+        );
+
+        scene.add(shape);
+
+        floatingObjects.push({
+            object:shape,
+            initialY:shape.position.y,
+            speed:.4+Math.random()*.6,
+            rotation:.002
+        });
+    }
+
+
+    /* GIANT ORBITAL RINGS */
+
+    for(let i=0;i<8;i++){
+
+        const ring = new THREE.Mesh(
+            new THREE.TorusGeometry(
+                2.2+i*.3,
+                .025,
+                8,
+                100
+            ),
+            i%2 ? copper : cream
+        );
+
+        ring.position.set(
+            i%2 ? 9 : -9,
+            3+Math.random()*5,
+            -12-i*13
+        );
+
+        ring.rotation.set(
+            Math.random(),
+            Math.random(),
+            Math.random()
+        );
+
+        scene.add(ring);
+        rings.push(ring);
+    }
+
+
+    /* FLOATING PARTICLES */
+
+    const particleCount = mobile ? 500 : 1400;
+
+    const positions = new Float32Array(particleCount*3);
+
+    for(let i=0;i<particleCount;i++){
+
+        positions[i*3] = (Math.random()-.5)*65;
+        positions[i*3+1] = (Math.random()-.5)*35;
+        positions[i*3+2] = -Math.random()*130;
+    }
+
+    const particleGeometry = new THREE.BufferGeometry();
+
+    particleGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(positions,3)
+    );
+
+    const particleMaterial = new THREE.PointsMaterial({
+        color:0xd7c9a8,
+        size:.055,
+        transparent:true,
+        opacity:.8,
+        sizeAttenuation:true
+    });
+
+    const particles = new THREE.Points(
+        particleGeometry,
+        particleMaterial
+    );
+
+    scene.add(particles);
+
+
+    /* STARS */
+
+    const starPositions = new Float32Array(1800*3);
+
+    for(let i=0;i<1800;i++){
+
+        starPositions[i*3] = (Math.random()-.5)*180;
+        starPositions[i*3+1] = (Math.random()-.5)*100;
+        starPositions[i*3+2] = -Math.random()*180;
+    }
+
+    const starGeometry = new THREE.BufferGeometry();
+
+    starGeometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(starPositions,3)
+    );
+
+    const stars = new THREE.Points(
+        starGeometry,
+        new THREE.PointsMaterial({
+            color:0xe2d8bd,
+            size:.07,
+            transparent:true,
+            opacity:.7
+        })
+    );
+
+    scene.add(stars);
+
+
+    /* DISTANT PLANET */
+
+    const planet = new THREE.Mesh(
+        new THREE.SphereGeometry(4,48,48),
+        new THREE.MeshStandardMaterial({
+            color:0x777a5e,
+            roughness:1
+        })
+    );
+
+    planet.position.set(15,12,-65);
+    scene.add(planet);
+
+    const planetRing = new THREE.Mesh(
+        new THREE.TorusGeometry(5.5,.09,8,100),
+        copper
+    );
+
+    planetRing.position.copy(planet.position);
+    planetRing.rotation.x = 1.15;
+    scene.add(planetRing);
+
+
+    /* DISTANT LIGHT BEACONS */
+
+    for(let i=0;i<12;i++){
+
+        const beacon = new THREE.Mesh(
+            new THREE.BoxGeometry(.12,3,.12),
+            copper
+        );
+
+        beacon.position.set(
+            (Math.random()-.5)*40,
+            -1,
+            -Math.random()*100
+        );
+
+        scene.add(beacon);
+
+        const glow = new THREE.PointLight(
+            0xb78a65,
+            12,
+            10
+        );
+
+        glow.position.copy(beacon.position);
+        glow.position.y += 2;
+
+        scene.add(glow);
+        movingLights.push(glow);
+    }
+
+
+    /* SCROLL CONTROL */
+
+    function updateScroll(){
+
+        const max = document.documentElement.scrollHeight-innerHeight;
+
+        scroll = max>0 ? scrollY/max : 0;
+    }
+
+    addEventListener("scroll",updateScroll,{passive:true});
+
+    updateScroll();
+
+
+    /* MOUSE MOVEMENT */
+
+    addEventListener("pointermove",e=>{
+
+        targetX = (e.clientX/innerWidth-.5)*1.3;
+        targetY = (e.clientY/innerHeight-.5)*.8;
 
     });
 
 
-    // RESIZE
+    /* CAMERA ANIMATION */
 
-    function resizeScene() {
+    let camX=0,camY=3,camZ=13;
 
-        const width = canvas.clientWidth;
-        const height = canvas.clientHeight;
+    const clockStart = clock.getElapsedTime();
 
-        if (!width || !height) return;
+    function render(){
 
-        camera.aspect = width / height;
+        if(reduceMotion){
+            renderer.render(scene,camera);
+            return;
+        }
 
+        raf = requestAnimationFrame(render);
+
+        const time = clock.getElapsedTime()-clockStart;
+
+        mouseX += (targetX-mouseX)*.025;
+        mouseY += (targetY-mouseY)*.025;
+
+        // Camera journey through the world
+        const desiredZ = 13-scroll*112;
+
+        const desiredX =
+            Math.sin(scroll*Math.PI*3)*3;
+
+        const desiredY =
+            3+Math.sin(scroll*Math.PI*2)*1.6;
+
+        camX += (desiredX-camX)*.025;
+        camY += (desiredY-camY)*.025;
+        camZ += (desiredZ-camZ)*.025;
+
+        camera.position.set(
+            camX+mouseX,
+            camY+mouseY,
+            camZ
+        );
+
+        camera.lookAt(
+            camX*.4,
+            1+Math.sin(scroll*5)*.6,
+            camZ-14
+        );
+
+
+        // Floating buildings
+        floatingObjects.forEach(item=>{
+
+            item.object.position.y =
+                item.initialY+
+                Math.sin(time*item.speed)*.35;
+
+            item.object.rotation.y += item.rotation;
+
+            item.object.rotation.x += item.rotation*.3;
+        });
+
+
+        // Rings rotating
+        rings.forEach((ring,i)=>{
+
+            ring.rotation.x += .001+i*.0001;
+            ring.rotation.y += .002;
+        });
+
+
+        // Particle drift
+        particles.rotation.y = time*.003;
+        stars.rotation.y = time*.0005;
+
+        // Planet movement
+        planet.rotation.y += .0008;
+        planetRing.rotation.z += .001;
+
+        // Moving cinematic lights
+        movingLights.forEach((light,i)=>{
+
+            light.intensity =
+                light.intensity*(.99)+
+                (80+Math.sin(time+i)*15)*.01;
+        });
+
+        copperLight.position.x = Math.sin(time*.25)*7;
+        copperLight.position.z = 5+Math.cos(time*.2)*5;
+
+        renderer.render(scene,camera);
+    }
+
+    render();
+
+
+    /* RESIZE */
+
+    addEventListener("resize",()=>{
+
+        camera.aspect = innerWidth/innerHeight;
         camera.updateProjectionMatrix();
 
-        renderer.setSize(width, height);
+        renderer.setSize(innerWidth,innerHeight);
 
-    }
+        renderer.setPixelRatio(
+            Math.min(devicePixelRatio,innerWidth<700?1.2:1.6)
+        );
+    });
 
-    window.addEventListener("resize", resizeScene);
 
+}catch(error){
 
-    // ANIMATION LOOP
+    console.error("3D scene initialization failed:",error);
 
-    const clock = new THREE.Clock();
-
-    function animate() {
-
-        requestAnimationFrame(animate);
-
-        const elapsed = clock.getElapsedTime();
-
-        sculpture.rotation.y =
-            elapsed * 0.15 + mouseX * 0.3;
-
-        sculpture.rotation.x =
-            Math.sin(elapsed * 0.35) * 0.15
-            + mouseY * 0.2;
-
-        core.rotation.x = elapsed * 0.25;
-        core.rotation.y = elapsed * 0.35;
-
-        particles.rotation.y = elapsed * 0.025;
-
-        sculpture.position.y =
-            Math.sin(elapsed * 0.7) * 0.13;
-
-        renderer.render(scene, camera);
-
-    }
-
-    animate();
-
+    host.style.background =
+        "radial-gradient(ellipse at center,#444632,#171812 70%)";
 }
 
 </script>
